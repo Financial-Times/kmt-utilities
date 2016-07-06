@@ -1,6 +1,6 @@
 {
     "ecmaFeatures" : {
-        "generators": true
+        generators: true
     },
     "rules": {
         "curly": 2,
@@ -29,8 +29,9 @@
         "indent": 0,
         "no-new": 0,
         "no-unused-expressions": 1,
-        "one-var": 0,
-        "no-underscore-dangle": 0
+        "no-underscore-dangle": 0,
+        "camelcase": [1, {"properties": "always"}],
+        "keyword-spacing": 2,
     },
     "env": {
         "browser": true,
