@@ -1,7 +1,9 @@
-var fs = require('fs');
-var config = require('./lib/config');
+'use strict';
 
-var paths = [
+const fs = require('fs');
+const config = require('./lib/config');
+
+const paths = [
   __dirname + '/lib/exceptions',
   __dirname + '/lib/facades',
   __dirname + '/lib/services',
