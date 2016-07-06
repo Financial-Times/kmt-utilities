@@ -1,19 +1,21 @@
 {
-  "name": "membership-node-toolkit",
-  "version": "1.0.0",
-  "description": "Membership Node.js toolkit",
+  "name": "kmt-utilities",
+  "version": "0.0.1",
+  "description": "kmt utility toolkit",
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha --harmony --recursive --require ./test/bootstrap.js"
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@git.svc.ft.com:7999/om/membership-node-toolkit.git"
+    "url": "https://github.com/Financial-Times/kmt-utilities.git"
   },
-  "author": "membership.b2b@ft.com",
+  "author": "thurston.tye@ft.com",
   "license": "MIT",
   "dependencies": {
-    "isomorphic-fetch": "^2.1.1"
+    "isomorphic-fetch": "^2.1.1",
+    "dateformat": "^1.0.11",
+    "winston": "^1.0.1"
   },
   "devDependencies": {
     "chai": "~3.2.0",
