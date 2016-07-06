@@ -1,0 +1,26 @@
+{
+  "name": "membership-node-toolkit",
+  "version": "1.0.0",
+  "description": "Membership Node.js toolkit",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --harmony --recursive --require ./test/bootstrap.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@git.svc.ft.com:7999/om/membership-node-toolkit.git"
+  },
+  "author": "membership.b2b@ft.com",
+  "license": "MIT",
+  "dependencies": {
+    "isomorphic-fetch": "^2.1.1"
+  },
+  "devDependencies": {
+    "chai": "~3.2.0",
+    "co": "^4.6.0",
+    "co-mocha": "^1.1.2",
+    "mocha": "~2.2.5",
+    "nock": "^2.10.0",
+    "sinon": "^1.15.4"
+  }
+}
