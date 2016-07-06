@@ -1,6 +1,6 @@
 {
     "ecmaFeatures" : {
-        generators: true
+        "generators": true
     },
     "rules": {
         "curly": 2,
