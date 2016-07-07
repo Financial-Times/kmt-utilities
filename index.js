@@ -4,8 +4,7 @@ const fs = require('fs');
 const config = require('./lib/config');
 
 const paths = [
-  __dirname + '/lib/exceptions',
-  __dirname + '/lib/facades',
+  __dirname + '/lib/middleware',
   __dirname + '/lib/services',
   __dirname + '/lib'
 ];
