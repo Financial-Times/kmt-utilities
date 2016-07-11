@@ -12,7 +12,7 @@ Set up a utilities.Config.js to pass any of the process.env values you want to t
             SESSION_API_HOST:process.env.SESSION_API_HOST
         };
 
-
+An API key for the services in this package is requried. Deails on obtaining one for your application can be found in the [membership api gateway](https://developer.ft.com/docs/membership_platform_api/) guide.
 
 ###Usage
 
