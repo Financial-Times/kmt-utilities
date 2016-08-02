@@ -1,11 +1,11 @@
-var chai = require('chai');
-var expect = chai.expect;
-var co = require('co');
-var json = require('../../lib/json');
+const chai = require('chai');
+const expect = chai.expect;
+const co = require('co');
+const json = require('../../lib/json');
 
 describe('lib/json', function() {
-  var response,
-    parsedJson;
+  let response;
+  let parsedJson;
 
   //happy path
 
@@ -39,10 +39,10 @@ describe('lib/json', function() {
     co(function* () {
       try {
         yield json.parse(response);
+
       }
       catch (e) {
-        expect(e.message).to.be.a('string');
-        expect(e.message).to.equal('Unexpected token o');
+        expect(e).to.be.an('error');
 
         done();
       }
