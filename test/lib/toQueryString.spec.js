@@ -12,9 +12,9 @@ describe('lib/toQueryString', function() {
     }
 
     let queryString = toQueryString(options);
-    console.log(queryString);
 
     expect(queryString).to.be.a('string');
+    expect(queryString.charAt(0)).to.equal('?');
 
     done();
   });
