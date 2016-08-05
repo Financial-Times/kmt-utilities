@@ -8,17 +8,14 @@ var logger = require('../../../lib/logger');
 var accessLicenceService = require('../../../lib/services/accessLicenceService');
 
 describe('lib/services/accessLicenceService', function() {
-  var accessLicenceId = 'foobarfoobarfoo',
-    user = {
-      id: 1
-    },
-    accessLicenceServiceHost = config.get('ACC_LICENCE_SVC_HOST'),
-    accessLicenceServicePath = '/membership/licences/v1',
-    accessLicenceServiceGetUri = '/membership/licences/v1/' + accessLicenceId,
-    accessLicenceServiceSeatsUri = accessLicenceServiceGetUri + '/seats',
-    accessLicenceServiceAdminsUri = accessLicenceServiceGetUri + '/administrators',
-    logMessageStub,
-    logMessages = [];
+
+  let accessLicenceId = 'foobarfoobarfoo';
+  let accessLicenceServiceHost = config.get('ACC_LICENCE_SVC_HOST');
+  let accessLicenceServiceGetUri = '/membership/licences/v1/' + accessLicenceId;
+  let accessLicenceServiceSeatsUri = accessLicenceServiceGetUri + '/seats';
+  let accessLicenceServiceAdminsUri = accessLicenceServiceGetUri + '/administrators';
+  let logMessageStub;
+  let logMessages = [];
 
   //setup
 
@@ -45,8 +42,6 @@ describe('lib/services/accessLicenceService', function() {
   });
 
   //happy path
-
-
   it('getLicenceInfo() should return licence info', function(done) {
     nock(accessLicenceServiceHost)
       .get(accessLicenceServiceGetUri)
@@ -56,7 +51,9 @@ describe('lib/services/accessLicenceService', function() {
 
     co(function* () {
       var licenceInfo = yield accessLicenceService.getLicenceInfo(accessLicenceId);
+
       expect(licenceInfo).to.exist;
+
       done();
     }).catch(done);
   });
@@ -113,7 +110,7 @@ describe('lib/services/accessLicenceService', function() {
     co(function* () {
       try {
         yield accessLicenceService.getSeats(accessLicenceId);
-      } catch(err) {
+      } catch (err) {
         expect(err).to.exist;
         expect(err.status).to.eql(500);
         done();
@@ -121,7 +118,7 @@ describe('lib/services/accessLicenceService', function() {
     }).catch(done);
   });
 
-  it('given a successful response from ALS, getSeats() should return the parsed JSON response', function(done) {
+  it('getSeats() should return the parsed JSON response given a successful response from ALS  ', function(done) {
     var data = {
       seats: []
     };
