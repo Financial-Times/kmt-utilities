@@ -7,7 +7,7 @@ var co = require('co');
 var logger = require('../../../lib/logger');
 var sessionService = require('../../../lib/services/sessionService');
 
-var serviceHost = config.get('SESSION_API_HOST');
+var serviceHost = config.get('API_GATEWAY_HOST');
 var serviceUri = '/sessions/foobar';
 
 var logMessageStub,
