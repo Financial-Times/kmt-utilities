@@ -16,14 +16,16 @@ An API key for the services in this package is requried. Deails on obtaining one
 
 ###Usage
 
-In your applicaition entry point (so app.js, server.js or index.js) require the utils package and utilities.Config.js and call:
+In your applicaition entry point (so app.js, server.js or index.js) require the utils package, utilities.Config.js and the initCookieSession:
 
         //... your app code
 		const kmtUtils = require('kmt-utilities');
 		const utilConfig = require('../utilitiesConfig');
 
 		kmtUtils.initialise(utilConfig);
-        //... your app code cont.
+        //... your app code cont...
+
+        app.use(kmtUtils.initCookieSession);
 
 
 For each place you require kmt middleware or services you will need to requre:
