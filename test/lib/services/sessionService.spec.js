@@ -1,17 +1,17 @@
-var chai = require('chai');
-var expect = chai.expect;
-var nock = require('nock');
-var config = require('../../../lib/config');
-var sinon = require('sinon');
-var co = require('co');
-var logger = require('../../../lib/logger');
-var sessionService = require('../../../lib/services/sessionService');
+const chai = require('chai');
+const expect = chai.expect;
+const nock = require('nock');
+const config = require('../../../lib/config');
+const sinon = require('sinon');
+const co = require('co');
+const logger = require('../../../lib/logger');
+const sessionService = require('../../../lib/services/sessionService');
 
-var serviceHost = config.get('API_GATEWAY_HOST');
-var serviceUri = '/sessions/foobar';
+const serviceHost = config.get('API_GATEWAY_HOST');
+const serviceUri = '/sessions/foobar';
 
-var logMessageStub,
-  logMessages = [];
+let logMessageStub;
+let  logMessages = [];
 
 describe('lib/services/sessionService', function() {
 
@@ -47,7 +47,7 @@ describe('lib/services/sessionService', function() {
     });
 
     co(function* () {
-      var response = yield sessionService.verify('foobar');
+      const response = yield sessionService.verify('foobar');
 
       expect(response).to.be.an('object');
       expect(response.foo).to.equal('bar');
@@ -69,7 +69,7 @@ describe('lib/services/sessionService', function() {
       }
       catch (e) {
         expect(e).to.be.an.instanceOf(Error);
-        expect(e.message).to.equal('Not Found');
+        expect(e.message).to.equal('Invalid session');
 
         done();
       }
