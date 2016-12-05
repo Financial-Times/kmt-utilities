@@ -1,21 +1,22 @@
-var chai = require('chai');
-var expect = chai.expect;
-var nock = require('nock');
-var config = require('../../../lib/config');
-var sinon = require('sinon');
-var co = require('co');
-var logger = require('../../../lib/logger');
-var accessLicenceService = require('../../../lib/services/accessLicenceService');
+const chai = require('chai');
+const expect = chai.expect;
+const nock = require('nock');
+const config = require('../../../lib/config');
+const envConf = require('../../config.json');
+const sinon = require('sinon');
+const co = require('co');
+const logger = require('../../../lib/logger');
+const accessLicenceService = require('../../../lib/services/accessLicenceService');
 
 describe('lib/services/accessLicenceService', function() {
 
-  let accessLicenceId = 'foobarfoobarfoo';
-  let accessLicenceServiceHost = config.get('ACC_LICENCE_SVC_HOST');
-  let accessLicenceServiceGetUri = '/membership/licences/v1/' + accessLicenceId;
-  let accessLicenceServiceSeatsUri = accessLicenceServiceGetUri + '/seats';
-  let accessLicenceServiceAdminsUri = accessLicenceServiceGetUri + '/administrators';
-  let logMessageStub;
+  const accessLicenceId = 'foobarfoobarfoo';
+  const accessLicenceServiceHost = envConf.ACC_LICENCE_SVC_HOST;
+  const accessLicenceServiceGetUri = '/membership/licences/v1/' + accessLicenceId;
+  const accessLicenceServiceSeatsUri = accessLicenceServiceGetUri + '/seats';
+  const accessLicenceServiceAdminsUri = accessLicenceServiceGetUri + '/administrators';
   let logMessages = [];
+  let logMessageStub;
 
   //setup
 
@@ -50,7 +51,7 @@ describe('lib/services/accessLicenceService', function() {
       });
 
     co(function* () {
-      var licenceInfo = yield accessLicenceService.getLicenceInfo(accessLicenceId);
+      const licenceInfo = yield accessLicenceService.getLicenceInfo(accessLicenceId);
 
       expect(licenceInfo).to.exist;
 
@@ -59,7 +60,7 @@ describe('lib/services/accessLicenceService', function() {
   });
 
   it('getLicenceInfo() licence info should have proper structure', function(done) {
-    var responseKeys = ['products', 'seatLimit', 'adminsHref', 'seatsHref'];
+    const responseKeys = ['products', 'seatLimit', 'adminsHref', 'seatsHref'];
     nock(accessLicenceServiceHost)
       .get(accessLicenceServiceGetUri)
       .reply(200, function(uri, body) {
@@ -67,7 +68,7 @@ describe('lib/services/accessLicenceService', function() {
       });
 
     co(function* () {
-      var licenceInfo = yield accessLicenceService.getLicenceInfo(accessLicenceId);
+      const licenceInfo = yield accessLicenceService.getLicenceInfo(accessLicenceId);
       expect(licenceInfo).to.contain.all.keys(responseKeys);
       done();
     }).catch(done);
@@ -82,7 +83,7 @@ describe('lib/services/accessLicenceService', function() {
       });
 
     co(function* () {
-      var licenceInfo = yield accessLicenceService.getLicenceInfo(accessLicenceId);
+      const licenceInfo = yield accessLicenceService.getLicenceInfo(accessLicenceId);
       done();
     }).catch(done);
   });
@@ -119,7 +120,7 @@ describe('lib/services/accessLicenceService', function() {
   });
 
   it('getSeats() should return the parsed JSON response given a successful response from ALS  ', function(done) {
-    var data = {
+    const data = {
       seats: []
     };
 
@@ -128,7 +129,7 @@ describe('lib/services/accessLicenceService', function() {
       .reply(200, data);
 
     co(function* () {
-      var response = yield accessLicenceService.getSeats(accessLicenceId);
+      const response = yield accessLicenceService.getSeats(accessLicenceId);
       expect(response).to.eql(data);
       done();
     }).catch(done);
@@ -136,7 +137,7 @@ describe('lib/services/accessLicenceService', function() {
 
   //Get admin happy path
   it('getAdministrators() should return parsed JSON if the response from ALS is successful', function(done) {
-    var data = {
+    const data = {
       administrators: []
     };
 
@@ -145,7 +146,7 @@ describe('lib/services/accessLicenceService', function() {
       .reply(200, data);
 
     co(function* () {
-      var response = yield accessLicenceService.getSeats(accessLicenceId);
+      const response = yield accessLicenceService.getSeats(accessLicenceId);
       expect(response).to.eql(data);
       done();
     }).catch(done);
