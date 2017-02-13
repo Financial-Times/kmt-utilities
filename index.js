@@ -6,6 +6,7 @@ const config = require('./lib/config');
 const paths = [
   __dirname + '/lib/middleware',
   __dirname + '/lib/services',
+  __dirname + '/lib/helpers',
   __dirname + '/lib'
 ];
 
