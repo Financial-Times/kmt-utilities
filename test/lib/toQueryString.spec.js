@@ -1,6 +1,6 @@
 const chai = require('chai');
 const expect = chai.expect;
-const toQueryString = require('../../lib/toQueryString');
+const toQueryString = require('../../lib/helpers/toQueryString');
 
 describe('lib/toQueryString', function() {
   //happy path

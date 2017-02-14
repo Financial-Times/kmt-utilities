@@ -1,6 +1,6 @@
 const chai = require('chai');
 const expect = chai.expect;
-const uriFragSplitter = require('../../lib/uriFragSplitter');
+const uriFragSplitter = require('../../lib/helpers/uriFragSplitter');
 
 describe('lib/uriFragSplitter', function() {
   //happy path
