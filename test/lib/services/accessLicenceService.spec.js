@@ -11,7 +11,7 @@ const accessLicenceService = require('../../../lib/services/accessLicenceService
 describe('lib/services/accessLicenceService', function() {
 
   const accessLicenceId = 'foobarfoobarfoo';
-  const accessLicenceServiceHost = envConf.ACC_LICENCE_SVC_HOST;
+  const accessLicenceServiceHost = envConf.API_GATEWAY_HOST;
   const accessLicenceServiceGetUri = '/membership/licences/v1/' + accessLicenceId;
   const accessLicenceServiceSeatsUri = accessLicenceServiceGetUri + '/seats';
   const accessLicenceServiceAdminsUri = accessLicenceServiceGetUri + '/administrators';
