@@ -13,7 +13,7 @@ const serviceUri = `authorize`;
 let logMessageStub;
 let logMessages = [];
 
-describe('lib/service/apiAuthService', function() {
+xdescribe('lib/service/apiAuthService', function() {
 
     //setup
     before(function(done) {
@@ -25,6 +25,7 @@ describe('lib/service/apiAuthService', function() {
     });
 
     afterEach(function(done) {
+        console.log(logMessages);
         logMessages = [];
 
         nock.cleanAll();
@@ -39,10 +40,10 @@ describe('lib/service/apiAuthService', function() {
     });
 
     it('getAuthToken() should return an access token as a string', function(done) {
-      console.log(serviceUri);
-        nock('https://api-t.ft.com:443')
+      console.log(`🙌  service uri: ${serviceHost}/${serviceUri}`);
+        nock(serviceHost)
         .get('/authorize')
-        .query({"response_type":"token","client_id":"baz","redirect_uri":"https://www.ft.com","scope":"licence_data"})
+        .query({'response_type':'token','client_id':'baz','scope':'licence_data'})
           .reply(200, {
             authToken: 'bar'
         });
@@ -51,8 +52,7 @@ describe('lib/service/apiAuthService', function() {
 
             let authToken = yield apiAuthService.getAuthToken(token);
 
-
-            //expect(authToken).to.equal('bar');
+            expect(authToken).to.equal('bar');
 
             done();
 

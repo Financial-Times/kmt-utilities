@@ -2,7 +2,7 @@ const chai = require('chai');
 const expect = chai.expect;
 const nock = require('nock');
 const config = require('../../../lib/config');
-const envConf = require('../../config.json');
+//const envConf = require('../../config.json');
 const sinon = require('sinon');
 const co = require('co');
 const logger = require('../../../lib/logger');
@@ -10,9 +10,9 @@ const accessLicenceService = require('../../../lib/services/accessLicenceService
 
 describe('lib/services/accessLicenceService', function() {
 
-  const accessLicenceId = 'foobarfoobarfoo';
-  const accessLicenceServiceHost = envConf.ACC_LICENCE_SVC_HOST;
-  const accessLicenceServiceGetUri = '/membership/licences/v1/' + accessLicenceId;
+  const accessLicenceId = '61d0efb5-e438-4137-a4db-c1fdc89387d8';
+  const accessLicenceServiceHost = config.get('API_GATEWAY_HOST');
+  const accessLicenceServiceGetUri = '/licences/' + accessLicenceId;
   const accessLicenceServiceSeatsUri = accessLicenceServiceGetUri + '/seats';
   const accessLicenceServiceAdminsUri = accessLicenceServiceGetUri + '/administrators';
   let logMessages = [];
@@ -44,6 +44,7 @@ describe('lib/services/accessLicenceService', function() {
 
   //happy path
   it('getLicenceInfo() should return licence info', function(done) {
+    console.log(accessLicenceServiceHost);
     nock(accessLicenceServiceHost)
       .get(accessLicenceServiceGetUri)
       .reply(200, function(uri, body) {
@@ -51,6 +52,7 @@ describe('lib/services/accessLicenceService', function() {
       });
 
     co(function* () {
+      console.log(accessLicenceId);
       const licenceInfo = yield accessLicenceService.getLicenceInfo(accessLicenceId);
 
       expect(licenceInfo).to.exist;

@@ -24,7 +24,7 @@ describe('lib/json', function() {
       expect(parsedJson.foo).to.equal('bar');
 
       done();
-    });
+    }).catch(done);
   });
 
   //unhappy path
