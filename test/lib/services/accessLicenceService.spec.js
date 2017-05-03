@@ -21,7 +21,7 @@ describe('lib/services/accessLicenceService', function() {
   //setup
 
   before(function(done) {
-    logMessageStub = sinon.stub(logger, 'log', function() {
+    logMessageStub = sinon.stub(logger, 'log').callsFake(() => {
       logMessages.push(arguments);
     });
 

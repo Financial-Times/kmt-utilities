@@ -10,16 +10,26 @@ const token = 'ftSessionS';
 const clientId = 'abc';
 const serviceHost = config.get('API_GATEWAY_HOST');
 const serviceUri = `authorize`;
+const validToken = 'validToken';
+const uriFragSplitter = require('../../../lib/helpers/uriFragSplitter');
 let logMessageStub;
 let logMessages = [];
+let uriFragSplitterStub;
+const locationHeader = `https://www.ft.com/#access_token=${validToken}&scope=licence_data&token_type=bearer&expires_in=1800`
 
 xdescribe('lib/service/apiAuthService', function() {
 
     //setup
     before(function(done) {
-      logMessageStub = sinon.stub(logger, 'log', function() {
+      logMessageStub = sinon.stub(logger, 'log').callsFake(() => {
         logMessages.push(arguments);
-        });
+      });
+
+        // uriFragSplitterStub = sinon.stub(uriFragSplitter);
+        //
+        // uriFragSplitterStub.withArgs(locationHeader).callsFake(() => {
+        //   return validToken;
+        // });
 
         done();
     });
@@ -29,29 +39,28 @@ xdescribe('lib/service/apiAuthService', function() {
         logMessages = [];
 
         nock.cleanAll();
-
         done();
     });
 
     after(function(done) {
         logMessageStub.restore();
-
         done();
     });
 
     it('getAuthToken() should return an access token as a string', function(done) {
-      console.log(`🙌  service uri: ${serviceHost}/${serviceUri}`);
-        nock(serviceHost)
+      console.log(`🙌  service uri: ${serviceHost}/${serviceUri} with: ${token}`);
+        nock('https://api-t.ft.com')
+        .filteringPath((path) => {
+          return '/authorize';
+        })
         .get('/authorize')
-        .query({'response_type':'token','client_id':'baz','scope':'licence_data'})
           .reply(200, {
-            authToken: 'bar'
+            url: ''
         });
 
         co(function* () {
 
             let authToken = yield apiAuthService.getAuthToken(token);
-
             expect(authToken).to.equal('bar');
 
             done();

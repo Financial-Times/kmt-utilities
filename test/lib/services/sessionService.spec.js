@@ -18,8 +18,8 @@ describe('lib/services/sessionService', function() {
   //setup
 
   before(function(done) {
-    logMessageStub = sinon.stub(logger, 'log', function() {
-    logMessages.push(arguments);
+    logMessageStub = sinon.stub(logger, 'log').callsFake(() => {
+        logMessages.push(arguments);
     });
 
     done();
