@@ -4,6 +4,7 @@
   "description": "kmt utility toolkit",
   "main": "index.js",
   "scripts": {
+    "lint": "./node_modules/.bin/eslint lib",
     "test": "./node_modules/.bin/mocha --harmony --recursive --require ./test/bootstrap.js"
   },
   "repository": {
@@ -21,6 +22,7 @@
     "winston": "^1.0.1"
   },
   "devDependencies": {
+    "eslint": "~3.7.1",
     "chai": "~3.2.0",
     "co": "^4.6.0",
     "co-mocha": "^1.1.2",
