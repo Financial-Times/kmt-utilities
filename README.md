@@ -1,5 +1,5 @@
 # kmt-utilities
-Common middleware for kmt microservices
+Common middleware for Knowledge Manager Tools (KMT) microservices
 
 ###Installation guide:
 
