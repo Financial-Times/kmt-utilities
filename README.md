@@ -20,7 +20,7 @@ If you want to update connected components with the latest version, you need to 
 1. Create a new repository release on gitHub. Please follow naming convention of previous releases.
 2. Go to `package.json` file of the component you want to update, and change `"kmt-utilities"` dependency version to the [newly released one](https://github.com/Financial-Times/kmt-utilities/releases).
 
-The following KAT components are currently using `kat-utilities`:
+The following KAT components are currently using `kmt-utilities`:
  - [kmt-overview](https://github.com/Financial-Times/kmt-overview)
  - [kmt-myft](https://github.com/Financial-Times/kmt-myft)
  - [kat-usage-report](https://github.com/Financial-Times/kat-usage-report)
