@@ -6,7 +6,7 @@ KAT (Knowledge & administration tools) is a part of ft.com application created f
 ## Getting started
 To get a copy of the project up and running on your local machine for development and testing purposes run `$ git clone git@github.com:Financial-Times/kmt-utilities.git`.
 
-Use the `.env` file saved in LastPass to set up necessary environmental variables (feel free to approach KAT team via #ft-syndikat slack channel if you have any questions of access issues).
+Use the `.env` file saved in LastPass to set up necessary environmental variables (feel free to approach KAT team via `#ft-syndikat` slack channel if you have any questions or access issues).
 
 ## Testing
 
@@ -37,9 +37,11 @@ An API key for the services in this package is required. Details on obtaining on
 
 In your application wherever you would like to use kat-utilities middleware, include the path to the code you want to use:
 
-    //... your app code
-	const initCookieSession = require('kmt-utilities/lib/initCookieSession');
-   // ... or
-	const [middlewareName] = require('kmt-utilities/lib/middleware/[middlewareName]');
-   // ... and then e.g.
+```js
+  //... your app code
+  const initCookieSession = require('kmt-utilities/lib/initCookieSession');
+  // ... or
+  const [middlewareName] = require('kmt-utilities/lib/middleware/[middlewareName]');
+  // ... and then e.g.
   app.use(initCookieSession);
+```
