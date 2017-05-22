@@ -29,7 +29,7 @@ The following KAT components are currently using `kmt-utilities`:
 
 #### Installation guide
 
-Include `"kmt-utilities": "financial-times/kmt-utilities/v[LATEST_RELEASE_VERSION]"` as a dependency in your package.json. [Information about the latest version](https://github.com/Financial-Times/kmt-utilities/releases).
+Include `"kmt-utilities": "financial-times/kmt-utilities#v[LATEST_RELEASE_VERSION]"` as a dependency in your package.json. [Information about the latest version](https://github.com/Financial-Times/kmt-utilities/releases).
 
 An API key for the services in this package is required. Details on obtaining one for your application can be found in the [membership api gateway](https://developer.ft.com/docs/membership_platform_api/) guide.
 
