@@ -15,7 +15,7 @@ Use the `.env` file saved in LastPass to set up necessary environmental variable
 ## Deployment
 This component has been created to be included throughout other KAT components.
 
-### How to update a repo that uses the component to the new footer version
+### How to update a repo that uses the component to the new version
 If you want to update connected components with the latest version, you need to follow the following steps:
 1. Create a new repository release on gitHub. Please follow naming convention of previous releases.
 2. Go to `package.json` file of the component you want to update, and change `"kmt-utilities"` dependency version to the [newly released one](https://github.com/Financial-Times/kmt-utilities/releases).
