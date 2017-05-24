@@ -18,6 +18,7 @@
     "cookie-session": "~2.0.0-alpha.1",
     "cookies": "~0.6.1",
     "bluebird": "~3.4.6",
+    "body-parser": "~1.14.2",
     "kat-client-proxies": "financial-times/kat-client-proxies#v0.0.1-beta.5"
   },
   "devDependencies": {
