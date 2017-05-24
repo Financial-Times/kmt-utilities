@@ -13,7 +13,7 @@ Use the `.env` file saved in LastPass to set up necessary environmental variable
 [TBD - when new tests are implemented]
 
 ## Deployment
-This module has been created to be included throughout other KAT modules.
+This module has been created to be included throughout other KAT components.
 
 ### How to update a repo that uses the module to the new version
 If you want to update connected components with the latest version, you need to follow the following steps:
