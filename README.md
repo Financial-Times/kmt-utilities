@@ -1,10 +1,10 @@
 # kmt-utilities
 Common middleware for KAT microservices.
 
-KAT (Knowledge & administration tools) is a part of ft.com application created for Financial Times B2B clients.
+KAT (Knowledge & administration tools) is an ft.com application created for Financial Times B2B clients.
 
 ## Getting started
-To get a copy of the project up and running on your local machine for development and testing purposes run `$ git clone git@github.com:Financial-Times/kmt-utilities.git`.
+To get a copy of the project up and running on your local machine for development and testing purposes run `$ git clone git@github.com:Financial-Times/kmt-utilities.git` and `$ npm install`.
 
 Use the `.env` file saved in LastPass to set up necessary environmental variables (feel free to approach KAT team via `#ft-syndikat` slack channel if you have any questions or access issues).
 
@@ -13,11 +13,11 @@ Use the `.env` file saved in LastPass to set up necessary environmental variable
 [TBD - when new tests are implemented]
 
 ## Deployment
-This component has been created to be included throughout other KAT components.
+This module has been created to be included throughout other KAT modules.
 
-### How to update a repo that uses the component to the new version
+### How to update a repo that uses the module to the new version
 If you want to update connected components with the latest version, you need to follow the following steps:
-1. Create a new repository release on gitHub. Please follow naming convention of previous releases.
+1. Create a new repository release on GitHub. Please follow the naming convention of previous releases.
 2. Go to `package.json` file of the component you want to update, and change `"kmt-utilities"` dependency version to the [newly released one](https://github.com/Financial-Times/kmt-utilities/releases).
 
 The following KAT components are currently using `kmt-utilities`:
@@ -25,7 +25,7 @@ The following KAT components are currently using `kmt-utilities`:
  - [kmt-myft](https://github.com/Financial-Times/kmt-myft)
  - [kat-usage-report](https://github.com/Financial-Times/kat-usage-report)
 
-### How to use the component
+### How to use the module
 
 #### Installation guide
 
