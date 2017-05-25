@@ -5,7 +5,7 @@ const expect = chai.expect;
 chai.use(require('chai-http'));
 const request = chai.request;
 const express = require('express');
-const {textOrJson} = require('./../../../lib/middleware/bodyParser');
+const {textOrJson} = require('./../../../index').bodyParser;
 
 describe('Users endpoints', () => {
     let logMessageStub;

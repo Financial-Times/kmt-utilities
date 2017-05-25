@@ -1,3 +1,5 @@
+require('dotenv').config({silent: true});
+
 const fs = require('fs');
 const paths = [
     `${__dirname}/lib/middleware`,
