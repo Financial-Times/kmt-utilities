@@ -4,7 +4,6 @@ const expect = require("chai").expect;
 const nock = require('nock');
 const httpMocks = require('node-mocks-http');
 const config = require('kat-client-proxies/lib/helpers/config');
-const expectOwnProperties = require('kat-client-proxies/test/helpers/expectExtensions').expectOwnProperties;
 const clientErrors = require('kat-client-proxies').clientErrors;
 const uuids = require('kat-client-proxies/test/mocks/uuids');
 const mockAPI = require('kat-client-proxies/test/helpers/env').USE_MOCK_API;
