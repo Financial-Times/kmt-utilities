@@ -58,17 +58,21 @@ describe('Users endpoints', () => {
             getAuthToken(req, res, nextSpy)
                 .then(() => {
                     expect(nextSpy.calledOnce).to.be.true;
-                    expect(req.apiAuthToken).to.be.an('string');
-                    expect(req.apiAuthToken).not.to.be.empty;
-                    freshToken = req.apiAuthToken;
+
+                    const thisToken = req.apiAuthToken;
+                    expect(thisToken).to.be.an('string');
+                    expect(thisToken).not.to.be.empty;
+                    freshToken = thisToken;
 
                     return getAuthToken(req, res, nextSpy);
                 })
                 .then(() => {
                     expect(nextSpy.calledTwice).to.be.true;
-                    expect(req.apiAuthToken).to.be.an('string');
-                    expect(req.apiAuthToken).not.to.be.empty;
-                    expect(req.apiAuthToken).to.be.equal(freshToken);
+
+                    const thisToken = req.apiAuthToken;
+                    expect(thisToken).to.be.an('string');
+                    expect(thisToken).not.to.be.empty;
+                    expect(thisToken).to.be.equal(freshToken);
                     done();
                 })
                 .catch(done);
