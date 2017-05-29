@@ -6,7 +6,6 @@ const httpMocks = require('node-mocks-http');
 const config = require('kat-client-proxies/lib/helpers/config');
 const clientErrors = require('kat-client-proxies').clientErrors;
 const uuids = require('kat-client-proxies/test/mocks/uuids');
-const mockAPI = require('kat-client-proxies/test/helpers/env').USE_MOCK_API;
 const {isActive, getLicenceDisplayInfo} = require('./../../../index').checkLicenceStatus;
 
 describe('middleware/checkLicenceStatus', () => {
@@ -22,9 +21,7 @@ describe('middleware/checkLicenceStatus', () => {
     });
 
     after(done => {
-        if (mockAPI) {
-            nock.cleanAll();
-        }
+        nock.cleanAll();
 
         logMessageStub.restore();
 
@@ -42,11 +39,9 @@ describe('middleware/checkLicenceStatus', () => {
         const res = httpMocks.createResponse();
 
         it('should call next() and set Cache-Control for a valid licence ID', done => {
-            if (mockAPI) {
-                nock(baseUrl)
-                    .get(`/licences/${uuids.validLicence}`)
-                    .reply(200, () => require('kat-client-proxies/test/mocks/fixtures/accessLicenceInfo'));
-            }
+            nock(baseUrl)
+                .get(`/licences/${uuids.validLicence}`)
+                .reply(200, () => require('kat-client-proxies/test/mocks/fixtures/accessLicenceInfo'));
 
             req.licenceId = uuids.validLicence;
             const nextSpy = sinon.spy();
@@ -64,11 +59,10 @@ describe('middleware/checkLicenceStatus', () => {
         });
 
         it('should call next() with an error for an invalid licenceId', done => {
-            if (mockAPI) {
-                nock(baseUrl)
-                    .get(`/licences/${uuids.invalidLicence}`)
-                    .reply(404, () => null);
-            }
+            nock(baseUrl)
+                .get(`/licences/${uuids.invalidLicence}`)
+                .reply(404, () => null);
+
             req.licenceId = uuids.invalidLicence;
             const nextSpy = sinon.spy(err => {
                 if (err) {
@@ -99,11 +93,9 @@ describe('middleware/checkLicenceStatus', () => {
         const res = httpMocks.createResponse();
 
         it('should call next() for a valid licence ID', done => {
-            if (mockAPI) {
-                nock(baseUrl)
-                    .get(`?access-licence-id=${uuids.validLicence}`)
-                    .reply(200, () => require('kat-client-proxies/test/mocks/fixtures/acquisitionContext'));
-            }
+            nock(baseUrl)
+                .get(`?access-licence-id=${uuids.validLicence}`)
+                .reply(200, () => require('kat-client-proxies/test/mocks/fixtures/acquisitionContext'));
 
             req.licenceId = uuids.validLicence;
             const nextSpy = sinon.spy();
@@ -118,11 +110,9 @@ describe('middleware/checkLicenceStatus', () => {
         });
 
         it('should call next() for a invalid licence ID', done => {
-            if (mockAPI) {
-                nock(baseUrl)
-                    .get(`?access-licence-id=${uuids.invalidLicence}`)
-                    .reply(200, () => ({items: []}));
-            }
+            nock(baseUrl)
+                .get(`?access-licence-id=${uuids.invalidLicence}`)
+                .reply(200, () => ({items: []}));
 
             req.licenceId = uuids.invalidLicence;
             const nextSpy = sinon.spy();

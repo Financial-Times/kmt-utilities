@@ -6,7 +6,6 @@ const httpMocks = require('node-mocks-http');
 const config = require('kat-client-proxies/lib/helpers/config');
 const expectOwnProperties = require('kat-client-proxies/test/helpers/expectExtensions').expectOwnProperties;
 const uuids = require('kat-client-proxies/test/mocks/uuids');
-const mockAPI = require('kat-client-proxies/test/helpers/env').USE_MOCK_API;
 const {getListOfLicences} = require('./../../../index');
 
 describe('middleware/getListOfLicences', () => {
@@ -22,9 +21,7 @@ describe('middleware/getListOfLicences', () => {
     });
 
     after(done => {
-        if (mockAPI) {
-            nock.cleanAll();
-        }
+        nock.cleanAll();
 
         logMessageStub.restore();
 
@@ -39,11 +36,9 @@ describe('middleware/getListOfLicences', () => {
     });
 
     it('should get the list of licences for a valid user and return the same list when called again', done => {
-        if (mockAPI) {
-            nock(config.ALS_API_URL)
-                .get(`/licences?adminuserid=${uuids.validUser}`)
-                .reply(200, () => require('kat-client-proxies/test/mocks/fixtures/accessLicenceGetLicence'));
-        }
+        nock(config.ALS_API_URL)
+            .get(`/licences?adminuserid=${uuids.validUser}`)
+            .reply(200, () => require('kat-client-proxies/test/mocks/fixtures/accessLicenceGetLicence'));
 
         req.currentUser = {uuid: uuids.validUser};
         const testItem = {

@@ -6,7 +6,6 @@ const httpMocks = require('node-mocks-http');
 const config = require('kat-client-proxies/lib/helpers/config');
 const expectOwnProperties = require('kat-client-proxies/test/helpers/expectExtensions').expectOwnProperties;
 const uuids = require('kat-client-proxies/test/mocks/uuids');
-const mockAPI = require('kat-client-proxies/test/helpers/env').USE_MOCK_API;
 const {getUserList} = require('./../../../index');
 
 describe('middleware/getUserList', () => {
@@ -22,9 +21,7 @@ describe('middleware/getUserList', () => {
     });
 
     after(done => {
-        if (mockAPI) {
-            nock.cleanAll();
-        }
+        nock.cleanAll();
 
         logMessageStub.restore();
 
@@ -40,11 +37,9 @@ describe('middleware/getUserList', () => {
     const res = httpMocks.createResponse();
 
     it('should get the list of users for a valid licence ID', done => {
-        if (mockAPI) {
-            nock(`${config.API_GATEWAY_HOST}/licence-seat-holders`)
-                .get(`/${uuids.validLicence}`)
-                .reply(200, () => require('kat-client-proxies/test/mocks/fixtures/licenceSeatHolders'));
-        }
+        nock(`${config.API_GATEWAY_HOST}/licence-seat-holders`)
+            .get(`/${uuids.validLicence}`)
+            .reply(200, () => require('kat-client-proxies/test/mocks/fixtures/licenceSeatHolders'));
 
         req.licenceId = uuids.validLicence;
         const nextSpy = sinon.spy();
@@ -65,11 +60,9 @@ describe('middleware/getUserList', () => {
     });
 
     it('should throw an error for an invalid licence ID', done => {
-        if (mockAPI) {
-            nock(`${config.API_GATEWAY_HOST}/licence-seat-holders`)
-                .get(`/${uuids.invalidLicence}`)
-                .reply(404, () => null);
-        }
+        nock(`${config.API_GATEWAY_HOST}/licence-seat-holders`)
+            .get(`/${uuids.invalidLicence}`)
+            .reply(404, () => null);
 
         req.licenceId = uuids.invalidLicence;
         const nextSpy = sinon.spy(err => {

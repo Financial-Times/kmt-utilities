@@ -1,11 +1,9 @@
 const logger = require('./../../../lib/logger');
 const sinon = require('sinon');
 const expect = require("chai").expect;
-const nock = require('nock');
 const httpMocks = require('node-mocks-http');
 const clientErrors = require('kat-client-proxies').clientErrors;
 const uuids = require('kat-client-proxies/test/mocks/uuids');
-const mockAPI = require('kat-client-proxies/test/helpers/env').USE_MOCK_API;
 const {getAuthToken} = require('./../../../index');
 const getSessionToken = require('./../helpers/getSessionToken');
 
@@ -29,10 +27,6 @@ describe('middleware/getAuthToken', () => {
     });
 
     after(done => {
-        if (mockAPI) {
-            nock.cleanAll();
-        }
-
         logMessageStub.restore();
 
         done();

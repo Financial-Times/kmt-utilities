@@ -6,7 +6,6 @@ const httpMocks = require('node-mocks-http');
 const config = require('kat-client-proxies/lib/helpers/config');
 const expectOwnProperties = require('kat-client-proxies/test/helpers/expectExtensions').expectOwnProperties;
 const uuids = require('kat-client-proxies/test/mocks/uuids');
-const mockAPI = require('kat-client-proxies/test/helpers/env').USE_MOCK_API;
 const {getLicenceSeatsInfo} = require('./../../../index');
 
 describe('middleware/getLicenceSeatsInfo', () => {
@@ -22,9 +21,7 @@ describe('middleware/getLicenceSeatsInfo', () => {
     });
 
     after(done => {
-        if (mockAPI) {
-            nock.cleanAll();
-        }
+        nock.cleanAll();
 
         logMessageStub.restore();
 
@@ -40,15 +37,13 @@ describe('middleware/getLicenceSeatsInfo', () => {
     const res = httpMocks.createResponse();
 
     it('should get the licence info (seatLimit, seatsAllocated) for a valid licence id', done => {
-        if (mockAPI) {
-            nock(config.ALS_API_URL)
-                .get(`/licences/${uuids.validLicence}`)
-                .reply(200, () => require('kat-client-proxies/test/mocks/fixtures/accessLicenceInfo'));
+        nock(config.ALS_API_URL)
+            .get(`/licences/${uuids.validLicence}`)
+            .reply(200, () => require('kat-client-proxies/test/mocks/fixtures/accessLicenceInfo'));
 
-            nock(config.ALS_API_URL)
-                .get(`/licences/${uuids.validLicence}/seats`)
-                .reply(200, () => require('kat-client-proxies/test/mocks/fixtures/accessLicenceGetSeats'));
-        }
+        nock(config.ALS_API_URL)
+            .get(`/licences/${uuids.validLicence}/seats`)
+            .reply(200, () => require('kat-client-proxies/test/mocks/fixtures/accessLicenceGetSeats'));
 
         req.licenceId = uuids.validLicence;
         const nextSpy = sinon.spy();
@@ -67,15 +62,13 @@ describe('middleware/getLicenceSeatsInfo', () => {
     });
 
     it('should not throw an error when an invalid licence id is provided', done => {
-        if (mockAPI) {
-            nock(config.ALS_API_URL)
-                .get(`/licences/${uuids.invalidLicence}`)
-                .reply(404, () => null);
+        nock(config.ALS_API_URL)
+            .get(`/licences/${uuids.invalidLicence}`)
+            .reply(404, () => null);
 
-            nock(config.ALS_API_URL)
-                .get(`/licences/${uuids.invalidLicence}/seats`)
-                .reply(200, () => ({seats: [], "allocatedSeatCount": 0}));
-        }
+        nock(config.ALS_API_URL)
+            .get(`/licences/${uuids.invalidLicence}/seats`)
+            .reply(200, () => ({seats: [], "allocatedSeatCount": 0}));
 
         req.licenceId = uuids.invalidLicence;
         const nextSpy = sinon.spy();

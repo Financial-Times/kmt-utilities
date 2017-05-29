@@ -5,7 +5,6 @@ const nock = require('nock');
 const httpMocks = require('node-mocks-http');
 const config = require('kat-client-proxies/lib/helpers/config');
 const uuids = require('kat-client-proxies/test/mocks/uuids');
-const mockAPI = require('kat-client-proxies/test/helpers/env').USE_MOCK_API;
 const {getLicenceId} = require('./../../../index');
 
 describe('middleware/getLicenceId', () => {
@@ -21,9 +20,7 @@ describe('middleware/getLicenceId', () => {
     });
 
     after(done => {
-        if (mockAPI) {
-            nock.cleanAll();
-        }
+        nock.cleanAll();
 
         logMessageStub.restore();
 
@@ -76,11 +73,9 @@ describe('middleware/getLicenceId', () => {
     });
 
     it('should redirect when an invalid licence id and a session is provided', done => {
-        if (mockAPI) {
-            nock(config.ALS_API_URL)
-                .get(`/licences?adminuserid=${uuids.validUser}`)
-                .reply(200, () => require('kat-client-proxies/test/mocks/fixtures/accessLicenceGetLicence'));
-        }
+        nock(config.ALS_API_URL)
+            .get(`/licences?adminuserid=${uuids.validUser}`)
+            .reply(200, () => require('kat-client-proxies/test/mocks/fixtures/accessLicenceGetLicence'));
 
         req.params.licenceId = 'invalidLicenceId';
         req.session = {isPopulated: true};
