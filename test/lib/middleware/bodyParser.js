@@ -7,7 +7,7 @@ const request = chai.request;
 const express = require('express');
 const {textOrJson} = require('./../../../index').bodyParser;
 
-describe('Users endpoints', () => {
+describe('middleware/bodyParser', () => {
     let logMessageStub;
     const logMessages = [];
 
@@ -27,7 +27,7 @@ describe('Users endpoints', () => {
 
     const app = express();
 
-    describe('middleware/bodyParser', () => {
+    describe('textOrJson', () => {
         const endpoint = '/body-parser';
         const textOrJsonEndpoint = `${endpoint}/text-or-json`;
         const textOrJsonErrorEndpoint = `${textOrJsonEndpoint}/error`;

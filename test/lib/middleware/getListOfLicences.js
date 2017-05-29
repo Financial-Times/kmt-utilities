@@ -9,7 +9,7 @@ const uuids = require('kat-client-proxies/test/mocks/uuids');
 const mockAPI = require('kat-client-proxies/test/helpers/env').USE_MOCK_API;
 const {getListOfLicences} = require('./../../../index');
 
-describe('Users endpoints', () => {
+describe('middleware/getListOfLicences', () => {
     let logMessageStub;
     const logMessages = [];
 
@@ -31,69 +31,66 @@ describe('Users endpoints', () => {
         done();
     });
 
-    describe('middleware/getListOfLicences', () => {
-        const endpoint = '/get-list-of-licences';
+    const endpoint = '/get-list-of-licences';
 
-        const req = httpMocks.createRequest({
-            method: 'POST',
-            url: `${endpoint}`
-        });
+    const req = httpMocks.createRequest({
+        method: 'POST',
+        url: `${endpoint}`
+    });
 
-        it('should get the list of licences for a valid user and return the same list when called again', done => {
-            if (mockAPI) {
-                nock(config.ALS_API_URL)
-                    .get(`/licences?adminuserid=${uuids.validUser}`)
-                    .reply(200, () => require('kat-client-proxies/test/mocks/fixtures/accessLicenceGetLicence'));
-            }
+    it('should get the list of licences for a valid user and return the same list when called again', done => {
+        if (mockAPI) {
+            nock(config.ALS_API_URL)
+                .get(`/licences?adminuserid=${uuids.validUser}`)
+                .reply(200, () => require('kat-client-proxies/test/mocks/fixtures/accessLicenceGetLicence'));
+        }
 
-            req.currentUser = {uuid: uuids.validUser};
-            const testItem = {
-                licenceId: 'test',
-                creationDate: 'test',
-                status: 'test',
-                contractId: 'test',
-                product: 'test'
-            };
+        req.currentUser = {uuid: uuids.validUser};
+        const testItem = {
+            licenceId: 'test',
+            creationDate: 'test',
+            status: 'test',
+            contractId: 'test',
+            product: 'test'
+        };
 
-            getListOfLicences(req)
-                .then(() => {
-                    const thisList = req.listOfLicences;
-                    expect(thisList).to.be.an('array');
-                    if (thisList.length > 0) {
-                        expectOwnProperties(thisList, ['licenceId', 'creationDate', 'status', 'contractId', 'product']);
-                    }
-                    req.listOfLicences.push(testItem);
-
-                    return getListOfLicences(req);
-                })
-                .then(() => {
-                    const thisList = req.listOfLicences;
-                    expect(thisList).to.be.an('array');
-                    expect(thisList.length).to.be.at.least(1);
+        getListOfLicences(req)
+            .then(() => {
+                const thisList = req.listOfLicences;
+                expect(thisList).to.be.an('array');
+                if (thisList.length > 0) {
                     expectOwnProperties(thisList, ['licenceId', 'creationDate', 'status', 'contractId', 'product']);
+                }
+                req.listOfLicences.push(testItem);
 
-                    const lastItem = thisList.slice(-1)[0];
-                    expect(lastItem).to.be.an('object');
-                    expect(lastItem).to.equal(testItem);
+                return getListOfLicences(req);
+            })
+            .then(() => {
+                const thisList = req.listOfLicences;
+                expect(thisList).to.be.an('array');
+                expect(thisList.length).to.be.at.least(1);
+                expectOwnProperties(thisList, ['licenceId', 'creationDate', 'status', 'contractId', 'product']);
 
-                    done();
-                })
-                .catch(done);
-        });
+                const lastItem = thisList.slice(-1)[0];
+                expect(lastItem).to.be.an('object');
+                expect(lastItem).to.equal(testItem);
 
-        it('should throw an error when no user is provided', done => {
-            delete req.currentUser;
+                done();
+            })
+            .catch(done);
+    });
 
-            getListOfLicences(req)
-                .then(() => {
-                    done(new Error('Nothing thrown'));
-                })
-                .catch(err => {
-                    expect(err).to.be.an.instanceof(Error);
+    it('should throw an error when no user is provided', done => {
+        delete req.currentUser;
 
-                    done();
-                });
-        });
+        getListOfLicences(req)
+            .then(() => {
+                done(new Error('Nothing thrown'));
+            })
+            .catch(err => {
+                expect(err).to.be.an.instanceof(Error);
+
+                done();
+            });
     });
 });
-
