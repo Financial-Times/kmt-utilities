@@ -13,9 +13,9 @@ describe('middleware/getAuthToken', () => {
     let sessionToken;
 
     before(done => {
-        //logMessageStub = sinon.stub(logger, 'log').callsFake((...params) => {
-        //    logMessages.push(params);
-        //});
+        logMessageStub = sinon.stub(logger, 'log').callsFake((...params) => {
+            logMessages.push(params);
+        });
 
         getSessionToken()
             .then(response => {
@@ -27,7 +27,7 @@ describe('middleware/getAuthToken', () => {
     });
 
     after(done => {
-        //logMessageStub.restore();
+        logMessageStub.restore();
 
         done();
     });
