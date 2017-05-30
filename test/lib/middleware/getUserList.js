@@ -66,6 +66,8 @@ describe('middleware/getUserList', () => {
 
         req.licenceId = uuids.invalidLicence;
         const nextSpy = sinon.spy(err => {
+            expect(err).to.be.an.instanceof(Error);
+
             if (err) {
                 throw err;
             }

@@ -75,6 +75,8 @@ describe('middleware/getAuthToken', () => {
         const req = httpMocks.createRequest(reqOptions);
         req.headers.cookie = 'FTSession_s=invalid';
         const nextSpy = sinon.spy(err => {
+            expect(err).to.be.an.instanceof(clientErrors.NotAuthorisedError);
+
             if (err) {
                 throw err;
             }

@@ -173,6 +173,8 @@ describe('middleware/isAdminSession', () => {
             });
 
             const nextSpy = sinon.spy(err => {
+                expect(err).to.be.an.instanceof(Error);
+
                 if (err) {
                     throw err;
                 }
@@ -207,6 +209,9 @@ describe('middleware/isAdminSession', () => {
             });
 
             const nextSpy = sinon.spy(err => {
+                expect(err).to.be.an.instanceof(Error);
+                expect(err.status).to.equal(403);
+
                 if (err) {
                     throw err;
                 }
@@ -243,6 +248,8 @@ describe('middleware/isAdminSession', () => {
             });
 
             const nextSpy = sinon.spy(err => {
+                expect(err).to.be.an.instanceof(Error);
+
                 if (err) {
                     throw err;
                 }

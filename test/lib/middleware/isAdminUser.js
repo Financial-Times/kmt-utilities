@@ -46,7 +46,6 @@ describe('middleware/isAdminUser', () => {
             },
             currentUser: {uuid: uuids.validUser}
         });
-        req.currentUser = {uuid: uuids.validUser};
 
         const nextSpy = sinon.spy();
 
@@ -70,9 +69,7 @@ describe('middleware/isAdminUser', () => {
         });
 
         const nextSpy = sinon.spy(err => {
-            if (err) {
-                throw err;
-            }
+            expect(err).to.be.an.instanceof(Error);
         });
 
         isAdminUser(req, res, nextSpy)

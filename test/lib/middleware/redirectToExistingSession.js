@@ -66,9 +66,8 @@ describe('middleware/redirectToExistingSession', () => {
         delete req.listOfLicences;
 
         const nextSpy = sinon.spy(err => {
-            if (err) {
-                throw err;
-            }
+            expect(err).to.be.an.instanceof(Error);
+            expect(err.status).to.equal(404);
         });
 
         redirectToExistingSession(req, res, nextSpy)
@@ -88,9 +87,8 @@ describe('middleware/redirectToExistingSession', () => {
         delete req.session;
 
         const nextSpy = sinon.spy(err => {
-            if (err) {
-                throw err;
-            }
+            expect(err).to.be.an.instanceof(Error);
+            expect(err.status).to.equal(404);
         });
 
         redirectToExistingSession(req, res, nextSpy)

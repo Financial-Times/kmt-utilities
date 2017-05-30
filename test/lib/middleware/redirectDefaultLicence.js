@@ -58,6 +58,9 @@ describe('middleware/redirectDefaultLicence', () => {
         delete req.currentUser;
 
 		const nextSpy = sinon.spy(err => {
+            expect(err).to.be.an.instanceof(Error);
+            expect(err.status).to.equal(404);
+
 			if (err) {
 				throw err;
 			}

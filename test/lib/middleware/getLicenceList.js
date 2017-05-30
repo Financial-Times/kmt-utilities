@@ -66,6 +66,9 @@ describe('middleware/getLicenceList', () => {
         delete req.currentUser;
 
         const nextSpy = sinon.spy(err => {
+            expect(err).to.be.an.instanceof(Error);
+            expect(err.status).to.equal(403);
+
             if (err) {
                 throw err;
             }
