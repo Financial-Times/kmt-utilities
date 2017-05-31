@@ -8,9 +8,35 @@ To get a copy of the project up and running on your local machine for developmen
 
 Use the `.env` file saved in LastPass to set up necessary environmental variables (feel free to approach KAT team via `#ft-syndikat` slack channel if you have any questions or access issues).
 
-## Testing
+## Test
 
-[TBD - when new tests are implemented]
+```sh
+$ npm test
+```
+_env vars required by the tests:_
+```javascript
+ACS_API_KEY='test' /*doesn't need to be the real one - 'test' will do*/
+ACS_API_URL='http://localhost' /*doesn't need to be the real one - 'http://localhost' will do*/
+ALS_API_KEY='test' /*doesn't need to be the real one - 'test' will do*/
+ALS_API_URL='http://localhost' /*doesn't need to be the real one - 'http://localhost' will do*/
+API_AUTH_CLIENT_ID /*needs to be the prod one*/
+API_GATEWAY_HOST /*needs to be the prod one*/
+API_GATEWAY_KEY /*needs to be the prod one*/
+BASE_PATH_ROUTE='/' /*doesn't need to be the real one - '/' will do*/
+BASE_PATH_URL='http://localhost' /*doesn't need to be the real one - 'http://localhost' will do*/
+DEFAULT_REDIRECT_URL='http://localhost' /*doesn't need to be the real one - 'http://localhost' will do*/
+HOST='local.ft.com'
+LOGIN_URL='https://accounts.ft.com/login?location='
+MYFT_API_KEY='test' /*doesn't need to be the real one - 'test' will do*/
+MYFT_API_URL='http://localhost' /*doesn't need to be the real one - 'http://localhost' will do*/
+SESSION_SERVICE_APIKEY /*needs to be the prod one*/
+SESSION_SERVICE_URL /*needs to be the prod one*/
+USER_PROFILE_API_KEY='test' /*doesn't need to be the real one - 'test' will do*/
+USER_PROFILE_API_URL='http://localhost' /*doesn't need to be the real one - 'http://localhost' will do*/
+LICENCE_UUID='8619e7a0-65b7-446b-9931-4197b3fe0cbf' /*this is the one kat-client-proxies fixtures use*/
+USER_UUID='c62c4485-7183-494c-a947-d754f5cd0a15' /*this is the one kat-client-proxies fixtures use*/
+MAX_RETRIES='0' /*so no retries happen*/
+```
 
 ## Deployment
 This module has been created to be included throughout other KAT components.
