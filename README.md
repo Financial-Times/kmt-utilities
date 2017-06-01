@@ -1,5 +1,5 @@
 # kmt-utilities
-Common middleware for KAT microservices.
+Common middleware and server side helpers for KAT microservices.
 
 KAT (Knowledge & administration tools) is an ft.com application created for Financial Times B2B clients.
 
