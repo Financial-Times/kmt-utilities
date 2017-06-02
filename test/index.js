@@ -3,7 +3,7 @@ require('dotenv').config({silent: true});
 const fs = require('fs');
 const paths = [
     `${__dirname}/lib/middleware`,
-    //`${__dirname}/lib/helpers`,
+    `${__dirname}/lib/helpers`,
     //`${__dirname}/lib`
 ];
 
