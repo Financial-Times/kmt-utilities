@@ -87,4 +87,3 @@ describe('middleware/getLicenceList', () => {
             });
     });
 });
-

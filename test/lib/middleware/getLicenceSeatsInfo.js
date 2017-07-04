@@ -86,4 +86,3 @@ describe('middleware/getLicenceSeatsInfo', () => {
             .catch(done);
     });
 });
-

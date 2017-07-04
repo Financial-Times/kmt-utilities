@@ -17,5 +17,3 @@ describe('helpers/getErrorMessage', () => {
         expect(errorMessage[0]).to.equal('The page you are trying to access is unavailable.');
     });
 });
-
- 

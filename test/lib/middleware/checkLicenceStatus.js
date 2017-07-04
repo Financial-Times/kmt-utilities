@@ -129,4 +129,3 @@ describe('middleware/checkLicenceStatus', () => {
         });
     });
 });
-

@@ -93,4 +93,3 @@ describe('middleware/getLicenceId', () => {
             .catch(done);
     });
 });
-
