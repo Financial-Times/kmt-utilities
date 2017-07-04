@@ -33,8 +33,8 @@ SESSION_SERVICE_APIKEY /*needs to be the prod one*/
 SESSION_SERVICE_URL /*needs to be the prod one*/
 USER_PROFILE_API_KEY='test' /*doesn't need to be the real one - 'test' will do*/
 USER_PROFILE_API_URL='http://localhost' /*doesn't need to be the real one - 'http://localhost' will do*/
-LICENCE_UUID='8619e7a0-65b7-446b-9931-4197b3fe0cbf' /*this is the one kat-client-proxies fixtures use*/
-USER_UUID='c62c4485-7183-494c-a947-d754f5cd0a15' /*this is the one kat-client-proxies fixtures use*/
+LICENCE_UUID='' /*this is the one kat-client-proxies fixtures use. refer to the CI vars for `kat-utilities` in `next-config-vars` for the required value */
+USER_UUID='' /*this is the one kat-client-proxies fixtures use. refer to the CI vars for `kat-utilities` in `next-config-vars` for the required value*/
 MAX_RETRIES='0' /*so no retries happen*/
 ```
 
