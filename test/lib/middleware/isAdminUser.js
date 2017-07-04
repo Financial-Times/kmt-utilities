@@ -1,8 +1,7 @@
 const logger = require('./../../../lib/logger');
 const sinon = require('sinon');
-const expect = require("chai").expect;
+const expect = require('chai').expect;
 const httpMocks = require('node-mocks-http');
-const config = require('kat-client-proxies/lib/helpers/config');
 const expectOwnProperties = require('kat-client-proxies/test/helpers/expectExtensions').expectOwnProperties;
 const uuids = require('kat-client-proxies/test/mocks/uuids');
 const {isAdminUser} = require('./../../../index');
@@ -40,7 +39,7 @@ describe('middleware/isAdminUser', () => {
                     {
                         accessLicenceId: uuids.validLicence,
                         userId: uuids.validUser,
-                        joinedDate: "2016-10-21T13:29:22.412Z"
+                        joinedDate: '2016-10-21T13:29:22.412Z'
                     }
                 ]
             },
@@ -85,4 +84,3 @@ describe('middleware/isAdminUser', () => {
             });
     });
 });
-

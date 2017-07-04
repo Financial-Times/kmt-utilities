@@ -1,6 +1,6 @@
 const logger = require('./../../../lib/logger');
 const sinon = require('sinon');
-const chai = require("chai");
+const chai = require('chai');
 const expect = chai.expect;
 chai.use(require('chai-http'));
 const request = chai.request;

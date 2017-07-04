@@ -16,7 +16,7 @@ module.exports = () => {
         };
         return fetch(process.env.SESSION_SERVICE_URL, options)
             .then(response => response.text())
-            .catch(err => "")
+            .catch(() => '')
             .then(token => {
                 sessionToken = token;
                 return sessionToken;

@@ -1,6 +1,6 @@
 const logger = require('./../../../lib/logger');
 const sinon = require('sinon');
-const expect = require("chai").expect;
+const expect = require('chai').expect;
 const httpMocks = require('node-mocks-http');
 const clientErrors = require('kat-client-proxies').clientErrors;
 const uuids = require('kat-client-proxies/test/mocks/uuids');
@@ -94,4 +94,3 @@ describe('middleware/getAuthToken', () => {
             });
     });
 });
-

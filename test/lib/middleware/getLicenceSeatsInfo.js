@@ -1,6 +1,6 @@
 const logger = require('./../../../lib/logger');
 const sinon = require('sinon');
-const expect = require("chai").expect;
+const expect = require('chai').expect;
 const nock = require('nock');
 const httpMocks = require('node-mocks-http');
 const config = require('kat-client-proxies/lib/helpers/config');
@@ -68,7 +68,7 @@ describe('middleware/getLicenceSeatsInfo', () => {
 
         nock(config.ALS_API_URL)
             .get(`/licences/${uuids.invalidLicence}/seats`)
-            .reply(200, () => ({seats: [], "allocatedSeatCount": 0}));
+            .reply(200, () => ({seats: [], 'allocatedSeatCount': 0}));
 
         req.licenceId = uuids.invalidLicence;
         const nextSpy = sinon.spy();
@@ -86,4 +86,3 @@ describe('middleware/getLicenceSeatsInfo', () => {
             .catch(done);
     });
 });
-

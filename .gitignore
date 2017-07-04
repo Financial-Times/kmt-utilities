@@ -1,7 +1,9 @@
 npm-debug.log
 /node_modules
 test/config.json
-
+.eslintrc.js
+.editorconfig
+.pa11yci.js
 .env
 
 .idea

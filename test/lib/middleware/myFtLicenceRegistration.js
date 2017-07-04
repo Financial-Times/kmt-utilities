@@ -1,6 +1,6 @@
 const logger = require('./../../../lib/logger');
 const sinon = require('sinon');
-const expect = require("chai").expect;
+const expect = require('chai').expect;
 const nock = require('nock');
 const httpMocks = require('node-mocks-http');
 const config = require('kat-client-proxies/lib/helpers/config');
@@ -128,4 +128,3 @@ describe('middleware/myFtLicenceRegistration', () => {
         });
     });
 });
-
