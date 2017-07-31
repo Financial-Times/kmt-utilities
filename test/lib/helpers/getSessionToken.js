@@ -8,13 +8,13 @@ module.exports = () => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'FT_Api_Key': process.env.SESSION_SERVICE_APIKEY,
+                'FT_Api_Key': process.env.KAT_SESSION_SERVICE_APIKEY || process.env.SESSION_SERVICE_APIKEY,
                 'Accept': '*/*',
                 'Cache-Control': 'no-cache'
             },
             body: JSON.stringify({uuid: uuids.validUser})
         };
-        return fetch(process.env.SESSION_SERVICE_URL, options)
+        return fetch(process.env.KAT_SESSION_SERVICE_URL || process.env.SESSION_SERVICE_URL, options)
             .then(response => response.text())
             .catch(() => '')
             .then(token => {
