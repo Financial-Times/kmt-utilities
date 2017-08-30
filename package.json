@@ -10,9 +10,6 @@
     "prepush": "make verify -j3",
     "commitmsg": "node_modules/.bin/secret-squirrel-commitmsg"
   },
-  "engines": {
-    "node": "8.1.0"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/Financial-Times/kmt-utilities.git"
