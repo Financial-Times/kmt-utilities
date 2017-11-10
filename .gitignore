@@ -8,3 +8,5 @@ test/config.json
 
 .idea
 *.env*
+
+package-lock.json
