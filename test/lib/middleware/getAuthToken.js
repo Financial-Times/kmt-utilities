@@ -53,10 +53,10 @@ describe('middleware/getAuthToken', () => {
 		let freshToken;
 
 		// get the authorisation token.
-        // This requires that we redirect to another URL with the access token placed
-        // after the hash, so this nock handles the redirect, and the next nock looks
-        // after the URL we are redirecting to.
-        nock(config.API_GATEWAY_HOST)
+		// This requires that we redirect to another URL with the access token placed
+		// after the hash, so this nock handles the redirect, and the next nock looks
+		// after the URL we are redirecting to.
+		nock(config.API_GATEWAY_HOST)
 			.get('/authorize')
 			.query(true)
 			.reply(301, undefined, { location: 'https://www.ft.com/#access_token=12345' });
