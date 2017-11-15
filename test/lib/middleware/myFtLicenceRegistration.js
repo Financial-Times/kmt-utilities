@@ -78,7 +78,7 @@ describe('middleware/myFtLicenceRegistration', () => {
 				.post(`/${myftConst.licenceNodeName}/${uuids.validLicence}/${myftConst.memberRelName}/${myftConst.groupNodeName}?noEvent=${config.MYFT_NO_EVENT}&waitForPurge=${config.MYFT_WAIT_FOR_PURGE_ADD}`)
 				.reply(200, () => ([]));
 
-			nock(config.ALS_API_URL)
+			nock(config.API_GATEWAY_HOST)
 				.get(`/licences/${uuids.validLicence}/seats`)
 				.reply(200, () => require('kat-client-proxies/test/mocks/fixtures/accessLicenceGetSeats'));
 
