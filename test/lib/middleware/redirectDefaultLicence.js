@@ -37,7 +37,7 @@ describe('middleware/redirectDefaultLicence', () => {
 	const res = httpMocks.createResponse();
 
 	it('should redirect to the first licence in the available list (when a valid user is provided)', done => {
-		nock(config.ALS_API_URL)
+		nock(config.API_GATEWAY_HOST)
 			.get(`/licences?adminuserid=${uuids.validUser}`)
 			.reply(200, () => require('kat-client-proxies/test/mocks/fixtures/accessLicenceGetLicence'));
 

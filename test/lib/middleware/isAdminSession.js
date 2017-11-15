@@ -38,7 +38,7 @@ describe('middleware/isAdminSession', () => {
 		});
 
 		it('should get the administrators for a valid licence UUID', done => {
-			nock(config.ALS_API_URL)
+			nock(config.API_GATEWAY_HOST)
 				.get(`/licences/${uuids.validLicence}/administrators`)
 				.reply(200, () => require('kat-client-proxies/test/mocks/fixtures/accessLicenceAdmins'));
 
@@ -64,7 +64,7 @@ describe('middleware/isAdminSession', () => {
 		});
 
 		it('should get an empty array for an invalid licence UUID', done => {
-			nock(config.ALS_API_URL)
+			nock(config.API_GATEWAY_HOST)
 				.get(`/licences/${uuids.invalidLicence}/administrators`)
 				.reply(200, () => ({administrators: []}));
 
@@ -90,7 +90,7 @@ describe('middleware/isAdminSession', () => {
 
 	describe('isAdminUser', () => {
 		it('should get the licence list for a valid licence/user UUID and a populated session', done => {
-			nock(config.ALS_API_URL)
+			nock(config.API_GATEWAY_HOST)
 				.get(`/licences?adminuserid=${uuids.validUser}`)
 				.reply(200, () => require('kat-client-proxies/test/mocks/fixtures/accessLicenceGetLicence'));
 
@@ -126,7 +126,7 @@ describe('middleware/isAdminSession', () => {
 
 
 		it('should get the licence list for a valid licence/user UUID and an unpopulated session', done => {
-			nock(config.ALS_API_URL)
+			nock(config.API_GATEWAY_HOST)
 				.get(`/licences?adminuserid=${uuids.validUser}`)
 				.reply(200, () => require('kat-client-proxies/test/mocks/fixtures/accessLicenceGetLicence'));
 
@@ -193,7 +193,7 @@ describe('middleware/isAdminSession', () => {
 		});
 
 		it('should throw and error for a valid licence UUID and an invalid user id', done => {
-			nock(config.ALS_API_URL)
+			nock(config.API_GATEWAY_HOST)
 				.get(`/licences?adminuserid=${uuids.invalidUser}`)
 				.reply(200, () => require('kat-client-proxies/test/mocks/fixtures/accessLicenceGetLicence'));
 
@@ -231,7 +231,7 @@ describe('middleware/isAdminSession', () => {
 		});
 
 		it('should throw an error for an invalid licence UUID', done => {
-			nock(config.ALS_API_URL)
+			nock(config.API_GATEWAY_HOST)
 				.get(`/licences?adminuserid=${uuids.validUser}`)
 				.reply(200, () => require('kat-client-proxies/test/mocks/fixtures/accessLicenceGetLicence'));
 

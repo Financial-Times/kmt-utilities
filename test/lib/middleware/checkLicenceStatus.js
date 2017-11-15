@@ -31,7 +31,7 @@ describe('middleware/checkLicenceStatus', () => {
 	const endpoint = '/check-licence-status';
 
 	describe('isActive', () => {
-		const baseUrl = config.ALS_API_URL;
+		const baseUrl = config.API_GATEWAY_HOST;
 		const req = httpMocks.createRequest({
 			method: 'POST',
 			url: `${endpoint}/is-active`

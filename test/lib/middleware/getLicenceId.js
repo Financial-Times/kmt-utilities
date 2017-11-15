@@ -73,7 +73,7 @@ describe('middleware/getLicenceId', () => {
 	});
 
 	it('should redirect when an invalid licence id and a session is provided', done => {
-		nock(config.ALS_API_URL)
+		nock(config.API_GATEWAY_HOST)
 			.get(`/licences?adminuserid=${uuids.validUser}`)
 			.reply(200, () => require('kat-client-proxies/test/mocks/fixtures/accessLicenceGetLicence'));
 

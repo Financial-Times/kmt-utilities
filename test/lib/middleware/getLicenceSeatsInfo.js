@@ -37,11 +37,11 @@ describe('middleware/getLicenceSeatsInfo', () => {
 	const res = httpMocks.createResponse();
 
 	it('should get the licence info (seatLimit, seatsAllocated) for a valid licence id', done => {
-		nock(config.ALS_API_URL)
+		nock(config.API_GATEWAY_HOST)
 			.get(`/licences/${uuids.validLicence}`)
 			.reply(200, () => require('kat-client-proxies/test/mocks/fixtures/accessLicenceInfo'));
 
-		nock(config.ALS_API_URL)
+		nock(config.API_GATEWAY_HOST)
 			.get(`/licences/${uuids.validLicence}/seats`)
 			.reply(200, () => require('kat-client-proxies/test/mocks/fixtures/accessLicenceGetSeats'));
 
@@ -62,11 +62,11 @@ describe('middleware/getLicenceSeatsInfo', () => {
 	});
 
 	it('should not throw an error when an invalid licence id is provided', done => {
-		nock(config.ALS_API_URL)
+		nock(config.API_GATEWAY_HOST)
 			.get(`/licences/${uuids.invalidLicence}`)
 			.reply(404, () => null);
 
-		nock(config.ALS_API_URL)
+		nock(config.API_GATEWAY_HOST)
 			.get(`/licences/${uuids.invalidLicence}/seats`)
 			.reply(200, () => ({seats: [], 'allocatedSeatCount': 0}));
 

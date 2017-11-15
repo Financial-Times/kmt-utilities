@@ -36,7 +36,7 @@ describe('middleware/getListOfLicences', () => {
 	});
 
 	it('should get the list of licences for a valid user and return the same list when called again', done => {
-		nock(config.ALS_API_URL)
+		nock(config.API_GATEWAY_HOST)
 			.get(`/licences?adminuserid=${uuids.validUser}`)
 			.reply(200, () => require('kat-client-proxies/test/mocks/fixtures/accessLicenceGetLicence'));
 

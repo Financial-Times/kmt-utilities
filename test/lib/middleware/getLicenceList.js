@@ -39,7 +39,7 @@ describe('middleware/getLicenceList', () => {
 	const res = httpMocks.createResponse();
 
 	it('should get the list of licences for a valid user', done => {
-		nock(config.ALS_API_URL)
+		nock(config.API_GATEWAY_HOST)
 			.get(`/licences?adminuserid=${uuids.validUser}`)
 			.reply(200, () => require('kat-client-proxies/test/mocks/fixtures/accessLicenceGetLicence'));
 
