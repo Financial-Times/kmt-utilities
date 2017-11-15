@@ -9,81 +9,81 @@ const uuids = require('kat-client-proxies/test/mocks/uuids');
 const {getLicenceList} = require('./../../../index');
 
 describe('middleware/getLicenceList', () => {
-    let logMessageStub;
-    const logMessages = [];
+	let logMessageStub;
+	const logMessages = [];
 
-    before(done => {
-        logMessageStub = sinon.stub(logger, 'log').callsFake((...params) => {
-            logMessages.push(params);
-        });
+	before(done => {
+		logMessageStub = sinon.stub(logger, 'log').callsFake((...params) => {
+			logMessages.push(params);
+		});
 
-        done();
-    });
+		done();
+	});
 
-    after(done => {
-        nock.cleanAll();
+	after(done => {
+		nock.cleanAll();
 
-        logMessageStub.restore();
+		logMessageStub.restore();
 
-        done();
-    });
+		done();
+	});
 
 
-    const endpoint = '/get-licence-list';
+	const endpoint = '/get-licence-list';
 
-    const req = httpMocks.createRequest({
-        method: 'POST',
-        url: `${endpoint}`
+	const req = httpMocks.createRequest({
+		method: 'POST',
+		url: `${endpoint}`
 
-    });
-    const res = httpMocks.createResponse();
+	});
+	const res = httpMocks.createResponse();
 
-    it('should get the list of licences for a valid user', done => {
-        nock(config.ALS_API_URL)
-            .get(`/licences?adminuserid=${uuids.validUser}`)
-            .reply(200, () => require('kat-client-proxies/test/mocks/fixtures/accessLicenceGetLicence'));
+	it('should get the list of licences for a valid user', done => {
+		nock(config.API_GATEWAY_HOST)
+			.get(`/licences?adminuserid=${uuids.validUser}`)
+			.reply(200, () => require('kat-client-proxies/test/mocks/fixtures/accessLicenceGetLicence'));
 
-        req.currentUser = {uuid: uuids.validUser};
+		req.currentUser = {uuid: uuids.validUser};
 
-        const nextSpy = sinon.spy();
+		const nextSpy = sinon.spy();
 
-        getLicenceList(req, res, nextSpy)
-            .then(() => {
-                expect(nextSpy.calledOnce).to.be.true;
+		getLicenceList(req, res, nextSpy)
+			.then(() => {
+				expect(nextSpy.calledOnce).to.be.true;
 
-                const thisList = req.listOfLicences;
-                expect(thisList).to.be.an('array');
-                if (thisList.length > 0) {
-                    expectOwnProperties(thisList, ['licenceId', 'creationDate', 'status', 'contractId', 'product']);
-                }
+				const thisList = req.listOfLicences;
+				expect(thisList).to.be.an('array');
+				if (thisList.length > 0) {
+					expectOwnProperties(thisList, ['licenceId', 'creationDate', 'status', 'contractId', 'product']);
+				}
 
-                done();
-            })
-            .catch(done);
-    });
+				done();
+			})
+			.catch(done);
+	});
 
-    it('should throw an error when no user is provided', done => {
-        delete req.currentUser;
+	it('should throw an error when no user is provided', done => {
+		delete req.currentUser;
 
-        const nextSpy = sinon.spy(err => {
-            expect(err).to.be.an.instanceof(Error);
-            expect(err.status).to.equal(403);
+		const nextSpy = sinon.spy(err => {
+			expect(err).to.be.an.instanceof(Error);
+			expect(err.status).to.equal(403);
 
-            if (err) {
-                throw err;
-            }
-        });
+			if (err) {
+				throw err;
+			}
+		});
 
-        getLicenceList(req, res, nextSpy)
-            .then(() => {
-                done(new Error('Nothing thrown'));
-            })
-            .catch(err => {
-                expect(nextSpy.calledOnce).to.be.true;
-                expect(err).to.be.an.instanceof(Error);
-                expect(err.status).to.equal(403);
+		getLicenceList(req, res, nextSpy)
+			.then(() => {
+				done(new Error('Nothing thrown'));
+			})
+			.catch(err => {
+				expect(nextSpy.calledOnce).to.be.true;
+				expect(err).to.be.an.instanceof(Error);
+				expect(err.status).to.equal(403);
 
-                done();
-            });
-    });
+				done();
+			});
+	});
 });

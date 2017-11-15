@@ -8,58 +8,58 @@ const uuids = require('kat-client-proxies/test/mocks/uuids');
 const {redirectDefaultLicence} = require('./../../../index');
 
 describe('middleware/redirectDefaultLicence', () => {
-    let logMessageStub;
-    const logMessages = [];
+	let logMessageStub;
+	const logMessages = [];
 
-    before(done => {
-        logMessageStub = sinon.stub(logger, 'log').callsFake((...params) => {
-            logMessages.push(params);
-        });
+	before(done => {
+		logMessageStub = sinon.stub(logger, 'log').callsFake((...params) => {
+			logMessages.push(params);
+		});
 
-        done();
-    });
+		done();
+	});
 
-    after(done => {
-        nock.cleanAll();
+	after(done => {
+		nock.cleanAll();
 
-        logMessageStub.restore();
+		logMessageStub.restore();
 
-        done();
-    });
+		done();
+	});
 
-    const endpoint = '/redirect-default-licence';
+	const endpoint = '/redirect-default-licence';
 
 	const req = httpMocks.createRequest({
 		method: 'POST',
 		url: `${endpoint}`,
 		currentUser: {uuid: uuids.validUser}
 	});
-    const res = httpMocks.createResponse();
+	const res = httpMocks.createResponse();
 
-    it('should redirect to the first licence in the available list (when a valid user is provided)', done => {
-        nock(config.ALS_API_URL)
-            .get(`/licences?adminuserid=${uuids.validUser}`)
-            .reply(200, () => require('kat-client-proxies/test/mocks/fixtures/accessLicenceGetLicence'));
+	it('should redirect to the first licence in the available list (when a valid user is provided)', done => {
+		nock(config.API_GATEWAY_HOST)
+			.get(`/licences?adminuserid=${uuids.validUser}`)
+			.reply(200, () => require('kat-client-proxies/test/mocks/fixtures/accessLicenceGetLicence'));
 
 
-        const nextSpy = sinon.spy();
+		const nextSpy = sinon.spy();
 
 		redirectDefaultLicence(req, res, nextSpy)
-            .then(() => {
-                const redirectUrl = res._getRedirectUrl();
-                expect(redirectUrl).not.to.be.empty;
+			.then(() => {
+				const redirectUrl = res._getRedirectUrl();
+				expect(redirectUrl).not.to.be.empty;
 
-                done();
-            })
-            .catch(done);
-    });
+				done();
+			})
+			.catch(done);
+	});
 
-    it('should throw an error when a user is not provided and/or there is not licence list', done => {
-        delete req.currentUser;
+	it('should throw an error when a user is not provided and/or there is not licence list', done => {
+		delete req.currentUser;
 
 		const nextSpy = sinon.spy(err => {
-            expect(err).to.be.an.instanceof(Error);
-            expect(err.status).to.equal(404);
+			expect(err).to.be.an.instanceof(Error);
+			expect(err.status).to.equal(404);
 
 			if (err) {
 				throw err;
@@ -77,5 +77,5 @@ describe('middleware/redirectDefaultLicence', () => {
 
 				done();
 			});
-    });
+	});
 });

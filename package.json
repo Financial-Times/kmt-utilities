@@ -25,7 +25,7 @@
     "cookies": "~0.6.1",
     "bluebird": "~3.4.6",
     "body-parser": "~1.14.2",
-    "kat-client-proxies": "financial-times/kat-client-proxies#v1.0.0"
+    "kat-client-proxies": "financial-times/kat-client-proxies#v2.1.10"
   },
   "devDependencies": {
     "@financial-times/n-gage": "^1.8.17",
