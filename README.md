@@ -47,9 +47,9 @@ If you want to update connected components with the latest version, you need to 
 2. Go to `package.json` file of the component you want to update, and change `"kmt-utilities"` dependency version to the [newly released one](https://github.com/Financial-Times/kmt-utilities/releases).
 
 The following KAT components are currently using `kmt-utilities`:
- - [kmt-overview](https://github.com/Financial-Times/kmt-overview)
- - [kmt-myft](https://github.com/Financial-Times/kmt-myft)
- - [kat-usage-report](https://github.com/Financial-Times/kat-usage-report)
+- [kmt-overview](https://github.com/Financial-Times/kmt-overview)
+- [kmt-myft](https://github.com/Financial-Times/kmt-myft)
+- [kat-usage-report](https://github.com/Financial-Times/kat-usage-report)
 
 ### How to use the module
 
@@ -64,10 +64,10 @@ An API key for the services in this package is required. Details on obtaining on
 In your application wherever you would like to use kat-utilities middleware, include the path to the code you want to use:
 
 ```js
-  //... your app code
-  const initCookieSession = require('kmt-utilities/lib/initCookieSession');
-  // ... or
-  const [middlewareName] = require('kmt-utilities/lib/middleware/[middlewareName]');
-  // ... and then e.g.
-  app.use(initCookieSession);
+//... your app code
+const initCookieSession = require('kmt-utilities/lib/initCookieSession');
+// ... or
+const [middlewareName] = require('kmt-utilities/lib/middleware/[middlewareName]');
+// ... and then e.g.
+app.use(initCookieSession);
 ```
