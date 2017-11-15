@@ -1,11 +1,13 @@
 const logger = require('./../../../lib/logger');
 const sinon = require('sinon');
+const nock = require('nock');
 const expect = require('chai').expect;
 const httpMocks = require('node-mocks-http');
 const clientErrors = require('kat-client-proxies').clientErrors;
 const uuids = require('kat-client-proxies/test/mocks/uuids');
-const {getAuthToken} = require('./../../../index');
+const { getAuthToken } = require('./../../../index');
 const getSessionToken = require('./../helpers/getSessionToken');
+const config = require('kat-client-proxies/lib/helpers/config');
 
 describe('middleware/getAuthToken', () => {
 	let logMessageStub;
@@ -26,10 +28,12 @@ describe('middleware/getAuthToken', () => {
 			.catch(done);
 	});
 
-	after(done => {
+	after(() => {
 		logMessageStub.restore();
+	});
 
-		done();
+	afterEach(() => {
+		nock.cleanAll();
 	});
 
 	const endpoint = '/get-auth-token';
@@ -47,6 +51,19 @@ describe('middleware/getAuthToken', () => {
 		req.headers.cookie = `FTSession_s=${sessionToken}`;
 		const nextSpy = sinon.spy();
 		let freshToken;
+
+		// get the authorisation token.
+        // This requires that we redirect to another URL with the access token placed
+        // after the hash, so this nock handles the redirect, and the next nock looks
+        // after the URL we are redirecting to.
+        nock(config.API_GATEWAY_HOST)
+			.get('/authorize')
+			.query(true)
+			.reply(301, undefined, { location: 'https://www.ft.com/#access_token=12345' });
+
+		nock('https://www.ft.com')
+			.get('/')
+			.reply(200);
 
 		getAuthToken(req, res, nextSpy)
 			.then(() => {
