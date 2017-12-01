@@ -20,8 +20,8 @@
   "author": "thurston.tye@ft.com",
   "license": "MIT",
   "dependencies": {
-    "@financial-times/n-logger": "~5.4.0",
     "@financial-times/kat-client-proxies": "^2.2.1",
+    "@financial-times/n-logger": "~5.4.0",
     "cookie-session": "~2.0.0-alpha.1",
     "cookies": "~0.6.1",
     "bluebird": "~3.4.6",
@@ -39,6 +39,7 @@
     "mocha": "^3.2.0",
     "nock": "^9.0.13",
     "node-mocks-http": "^1.6.1",
+    "npm-prepublish": "^1.2.3",
     "sinon": "^2.2.0",
     "sinon-chai": "^2.10.0"
   },
