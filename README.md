@@ -4,38 +4,14 @@ Common middleware and server side helpers for KAT microservices.
 KAT (Knowledge & administration tools) is an ft.com application created for Financial Times B2B clients.
 
 ## Getting started
-To get a copy of the project up and running on your local machine for development and testing purposes run `$ git clone git@github.com:Financial-Times/kmt-utilities.git` and `$ npm install`.
+To get a copy of the project up and running on your local machine for development and testing purposes run `$ git clone git@github.com:Financial-Times/kmt-utilities.git` and `$ make install`.
 
-Use the `.env` file saved in LastPass to set up necessary environmental variables (feel free to approach KAT team via `#ft-syndikat` slack channel if you have any questions or access issues).
+Use `make .env` to get the necessary environmental variables.
 
 ## Test
 
 ```sh
 $ make test
-```
-_env vars required by the tests:_
-```javascript
-ACS_API_KEY='test' /*doesn't need to be the real one - 'test' will do*/
-ACS_API_URL='http://localhost' /*doesn't need to be the real one - 'http://localhost' will do*/
-ALS_API_KEY='test' /*doesn't need to be the real one - 'test' will do*/
-ALS_API_URL='http://localhost' /*doesn't need to be the real one - 'http://localhost' will do*/
-API_AUTH_CLIENT_ID /*needs to be the prod one*/
-API_GATEWAY_HOST /*needs to be the prod one*/
-API_GATEWAY_KEY /*needs to be the prod one*/
-BASE_PATH_ROUTE='/' /*doesn't need to be the real one - '/' will do*/
-BASE_PATH_URL='http://localhost' /*doesn't need to be the real one - 'http://localhost' will do*/
-DEFAULT_REDIRECT_URL='http://localhost' /*doesn't need to be the real one - 'http://localhost' will do*/
-HOST='local.ft.com'
-LOGIN_URL='https://accounts.ft.com/login?location='
-MYFT_API_KEY='test' /*doesn't need to be the real one - 'test' will do*/
-MYFT_API_URL='http://localhost' /*doesn't need to be the real one - 'http://localhost' will do*/
-SESSION_SERVICE_APIKEY /*needs to be the prod one*/
-SESSION_SERVICE_URL /*needs to be the prod one*/
-USER_PROFILE_API_KEY='test' /*doesn't need to be the real one - 'test' will do*/
-USER_PROFILE_API_URL='http://localhost' /*doesn't need to be the real one - 'http://localhost' will do*/
-LICENCE_UUID='' /*this is the one kat-client-proxies fixtures use. refer to the CI vars for `kat-utilities` in `next-config-vars` for the required value */
-USER_UUID='' /*this is the one kat-client-proxies fixtures use. refer to the CI vars for `kat-utilities` in `next-config-vars` for the required value*/
-MAX_RETRIES='0' /*so no retries happen*/
 ```
 
 ## Deployment
@@ -47,9 +23,11 @@ If you want to update connected components with the latest version, you need to 
 2. Go to `package.json` file of the component you want to update, and change `"kmt-utilities"` dependency version to the [newly released one](https://github.com/Financial-Times/kmt-utilities/releases).
 
 The following KAT components are currently using `kmt-utilities`:
-- [kmt-overview](https://github.com/Financial-Times/kmt-overview)
-- [kmt-myft](https://github.com/Financial-Times/kmt-myft)
-- [kat-usage-report](https://github.com/Financial-Times/kat-usage-report)
+- [kat-overview](https://github.com/Financial-Times/kat-overview)
+- [kat-myft](https://github.com/Financial-Times/kat-myft)
+- [kat-usage](https://github.com/Financial-Times/kat-usage)
+- [kat-users](https://github.com/Financial-Times/kat-users)
+- [kat-groups](https://github.com/Financial-Times/kat-groups)
 
 ### How to use the module
 
