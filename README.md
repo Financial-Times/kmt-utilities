@@ -11,7 +11,7 @@ Use the `.env` file saved in LastPass to set up necessary environmental variable
 ## Test
 
 ```sh
-$ npm test
+$ make test
 ```
 _env vars required by the tests:_
 ```javascript
