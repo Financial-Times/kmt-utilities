@@ -1,6 +1,6 @@
 // TODO - Move this somewhere else as it isn't a test. I would expect tests for helpers in this folder. (AJ)
 let sessionToken = undefined;
-const uuids = require('kat-client-proxies/test/mocks/uuids');
+const uuids = require('@financial-times/kat-client-proxies/test/mocks/uuids');
 
 module.exports = () => {
 	if (sessionToken === undefined) {

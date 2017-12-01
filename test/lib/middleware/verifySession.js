@@ -3,9 +3,9 @@ const sinon = require('sinon');
 const expect = require('chai').expect;
 const nock = require('nock');
 const httpMocks = require('node-mocks-http');
-const config = require('kat-client-proxies/lib/helpers/config');
-const expectOwnProperties = require('kat-client-proxies/test/helpers/expectExtensions').expectOwnProperties;
-const uuids = require('kat-client-proxies/test/mocks/uuids');
+const config = require('@financial-times/kat-client-proxies/lib/helpers/config');
+const expectOwnProperties = require('@financial-times/kat-client-proxies/test/helpers/expectExtensions').expectOwnProperties;
+const uuids = require('@financial-times/kat-client-proxies/test/mocks/uuids');
 const {getUserId} = require('./../../../index').verifySession;
 
 describe('middleware/verifySession', () => {
@@ -41,7 +41,7 @@ describe('middleware/verifySession', () => {
 		it('should validate the session and return the logged in user details', done => {
 			nock(config.API_GATEWAY_HOST)
 				.get(`/sessions/${uuids.validFTSession}`)
-				.reply(200, () => require('kat-client-proxies/test/mocks/fixtures/sessionVerify'));
+				.reply(200, () => require('@financial-times/kat-client-proxies/test/mocks/fixtures/sessionVerify'));
 
 			req.headers.cookie = `FTSession=${uuids.validFTSession}`;
 			const nextSpy = sinon.spy();

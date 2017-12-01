@@ -3,9 +3,9 @@ const sinon = require('sinon');
 const expect = require('chai').expect;
 const nock = require('nock');
 const httpMocks = require('node-mocks-http');
-const config = require('kat-client-proxies/lib/helpers/config');
-const clientErrors = require('kat-client-proxies').clientErrors;
-const uuids = require('kat-client-proxies/test/mocks/uuids');
+const config = require('@financial-times/kat-client-proxies/lib/helpers/config');
+const clientErrors = require('@financial-times/kat-client-proxies').clientErrors;
+const uuids = require('@financial-times/kat-client-proxies/test/mocks/uuids');
 const {isActive, getLicenceDisplayInfo} = require('./../../../index').checkLicenceStatus;
 
 describe('middleware/checkLicenceStatus', () => {
@@ -41,7 +41,7 @@ describe('middleware/checkLicenceStatus', () => {
 		it('should call next() and set Cache-Control for a valid licence ID', done => {
 			nock(baseUrl)
 				.get(`/licences/${uuids.validLicence}`)
-				.reply(200, () => require('kat-client-proxies/test/mocks/fixtures/accessLicenceInfo'));
+				.reply(200, () => require('@financial-times/kat-client-proxies/test/mocks/fixtures/accessLicenceInfo'));
 
 			req.licenceId = uuids.validLicence;
 			const nextSpy = sinon.spy();
@@ -97,7 +97,7 @@ describe('middleware/checkLicenceStatus', () => {
 		it('should call next() for a valid licence ID', done => {
 			nock(baseUrl)
 				.get(`?access-licence-id=${uuids.validLicence}`)
-				.reply(200, () => require('kat-client-proxies/test/mocks/fixtures/acquisitionContext'));
+				.reply(200, () => require('@financial-times/kat-client-proxies/test/mocks/fixtures/acquisitionContext'));
 
 			req.licenceId = uuids.validLicence;
 			const nextSpy = sinon.spy();

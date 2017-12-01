@@ -3,9 +3,9 @@ const sinon = require('sinon');
 const expect = require('chai').expect;
 const nock = require('nock');
 const httpMocks = require('node-mocks-http');
-const config = require('kat-client-proxies/lib/helpers/config');
-const expectOwnProperties = require('kat-client-proxies/test/helpers/expectExtensions').expectOwnProperties;
-const uuids = require('kat-client-proxies/test/mocks/uuids');
+const config = require('@financial-times/kat-client-proxies/lib/helpers/config');
+const expectOwnProperties = require('@financial-times/kat-client-proxies/test/helpers/expectExtensions').expectOwnProperties;
+const uuids = require('@financial-times/kat-client-proxies/test/mocks/uuids');
 const {getListOfLicences} = require('./../../../index');
 
 describe('middleware/getListOfLicences', () => {
@@ -38,7 +38,7 @@ describe('middleware/getListOfLicences', () => {
 	it('should get the list of licences for a valid user and return the same list when called again', done => {
 		nock(config.API_GATEWAY_HOST)
 			.get(`/licences?adminuserid=${uuids.validUser}`)
-			.reply(200, () => require('kat-client-proxies/test/mocks/fixtures/accessLicenceGetLicence'));
+			.reply(200, () => require('@financial-times/kat-client-proxies/test/mocks/fixtures/accessLicenceGetLicence'));
 
 		req.currentUser = {uuid: uuids.validUser};
 		const testItem = {

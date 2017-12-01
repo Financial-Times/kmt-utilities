@@ -3,9 +3,11 @@ const sinon = require('sinon');
 const expect = require('chai').expect;
 const nock = require('nock');
 const httpMocks = require('node-mocks-http');
-const config = require('kat-client-proxies/lib/helpers/config');
-const expectOwnProperties = require('kat-client-proxies/test/helpers/expectExtensions').expectOwnProperties;
-const uuids = require('kat-client-proxies/test/mocks/uuids');
+const config = require('@financial-times/kat-client-proxies/lib/helpers/config');
+const expectOwnProperties = require('@financial-times/kat-client-proxies/test/helpers/expectExtensions').expectOwnProperties;
+const uuids = require('@financial-times/kat-client-proxies/test/mocks/uuids');
+const accessLicenceGetLicenceFixtures = require('@financial-times/kat-client-proxies/test/mocks/fixtures/accessLicenceGetLicence');
+const licenceDataAdminsFixtures = require('@financial-times/kat-client-proxies/test/mocks/fixtures/licenceDataAdmins');
 const {getAdminUserList, isAdminUser} = require('./../../../index').isAdminSession;
 
 describe('middleware/isAdminSession', () => {
@@ -40,7 +42,7 @@ describe('middleware/isAdminSession', () => {
 		it('should get the administrators for a valid licence UUID', done => {
 			nock(config.API_GATEWAY_HOST)
 				.get(`/licences/${uuids.validLicence}/administrators`)
-				.reply(200, () => require('kat-client-proxies/test/mocks/fixtures/accessLicenceAdmins'));
+				.reply(200, () => require('@financial-times/kat-client-proxies/test/mocks/fixtures/accessLicenceAdmins'));
 
 			req.licenceId = uuids.validLicence;
 			const nextSpy = sinon.spy();
@@ -92,7 +94,7 @@ describe('middleware/isAdminSession', () => {
 		it('should get the licence list for a valid licence/user UUID and a populated session', done => {
 			nock(config.API_GATEWAY_HOST)
 				.get(`/licences?adminuserid=${uuids.validUser}`)
-				.reply(200, () => require('kat-client-proxies/test/mocks/fixtures/accessLicenceGetLicence'));
+				.reply(200, () => accessLicenceGetLicenceFixtures);
 
 			const req = httpMocks.createRequest({
 				method: 'POST',
@@ -128,11 +130,11 @@ describe('middleware/isAdminSession', () => {
 		it('should get the licence list for a valid licence/user UUID and an unpopulated session', done => {
 			nock(config.API_GATEWAY_HOST)
 				.get(`/licences?adminuserid=${uuids.validUser}`)
-				.reply(200, () => require('kat-client-proxies/test/mocks/fixtures/accessLicenceGetLicence'));
+				.reply(200, () => accessLicenceGetLicenceFixtures);
 
 			nock(`${config.API_GATEWAY_HOST}/licence-seat-holders`)
 				.get(`/${uuids.validLicence}/admins`)
-				.reply(200, () => require('kat-client-proxies/test/mocks/fixtures/licenceDataAdmins'));
+				.reply(200, () => licenceDataAdminsFixtures);
 
 			const req = httpMocks.createRequest({
 				method: 'POST',
@@ -195,11 +197,11 @@ describe('middleware/isAdminSession', () => {
 		it('should throw and error for a valid licence UUID and an invalid user id', done => {
 			nock(config.API_GATEWAY_HOST)
 				.get(`/licences?adminuserid=${uuids.invalidUser}`)
-				.reply(200, () => require('kat-client-proxies/test/mocks/fixtures/accessLicenceGetLicence'));
+				.reply(200, () => accessLicenceGetLicenceFixtures);
 
 			nock(`${config.API_GATEWAY_HOST}/licence-seat-holders`)
 				.get(`/${uuids.validLicence}/admins`)
-				.reply(200, () => require('kat-client-proxies/test/mocks/fixtures/licenceDataAdmins'));
+				.reply(200, () => licenceDataAdminsFixtures);
 
 			const req = httpMocks.createRequest({
 				method: 'POST',
@@ -233,7 +235,7 @@ describe('middleware/isAdminSession', () => {
 		it('should throw an error for an invalid licence UUID', done => {
 			nock(config.API_GATEWAY_HOST)
 				.get(`/licences?adminuserid=${uuids.validUser}`)
-				.reply(200, () => require('kat-client-proxies/test/mocks/fixtures/accessLicenceGetLicence'));
+				.reply(200, () => accessLicenceGetLicenceFixtures);
 
 			nock(`${config.API_GATEWAY_HOST}/licence-seat-holders`)
 				.get(`/${uuids.invalidLicence}/admins`)

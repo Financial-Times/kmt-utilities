@@ -3,8 +3,9 @@ const sinon = require('sinon');
 const expect = require('chai').expect;
 const nock = require('nock');
 const httpMocks = require('node-mocks-http');
-const config = require('kat-client-proxies/lib/helpers/config');
-const uuids = require('kat-client-proxies/test/mocks/uuids');
+const config = require('@financial-times/kat-client-proxies/lib/helpers/config');
+const uuids = require('@financial-times/kat-client-proxies/test/mocks/uuids');
+const getLicenceMembersFixture = require('@financial-times/kat-client-proxies/test/mocks/fixtures/getLicenceMembers');
 const {checkAndRegister} = require('./../../../index').myFtLicenceRegistration;
 
 const myftConst = config.myftClientConstants;
@@ -40,7 +41,7 @@ describe('middleware/myFtLicenceRegistration', () => {
 			licenceId: uuids.validLicence,
 			currentUser: {uuid: uuids.validUser}
 		});
-		const licenceDetails = require('kat-client-proxies/test/mocks/fixtures/getLicence');
+		const licenceDetails = require('@financial-times/kat-client-proxies/test/mocks/fixtures/getLicence');
 		licenceDetails[config.FT_TOOL_DATE_ID] = '1476437354312';
 
 		it('should not try any operations as the licence is already registered', done => {
@@ -72,7 +73,7 @@ describe('middleware/myFtLicenceRegistration', () => {
 
 			nock(config.MYFT_API_URL)
 				.get(`/${myftConst.licenceNodeName}/${uuids.validLicence}/${myftConst.memberRelName}/${myftConst.groupNodeName}/${uuids.validLicence}`)
-				.reply(200, () => require('kat-client-proxies/test/mocks/fixtures/getGroupFromLicence'));
+				.reply(200, () => require('@financial-times/kat-client-proxies/test/mocks/fixtures/getGroupFromLicence'));
 
 			nock(config.MYFT_API_URL)
 				.post(`/${myftConst.licenceNodeName}/${uuids.validLicence}/${myftConst.memberRelName}/${myftConst.groupNodeName}?noEvent=${config.MYFT_NO_EVENT}&waitForPurge=${config.MYFT_WAIT_FOR_PURGE_ADD}`)
@@ -80,15 +81,15 @@ describe('middleware/myFtLicenceRegistration', () => {
 
 			nock(config.API_GATEWAY_HOST)
 				.get(`/licences/${uuids.validLicence}/seats`)
-				.reply(200, () => require('kat-client-proxies/test/mocks/fixtures/accessLicenceGetSeats'));
+				.reply(200, () => require('@financial-times/kat-client-proxies/test/mocks/fixtures/accessLicenceGetSeats'));
 
 			nock(config.MYFT_API_URL)
 				.get(`/${myftConst.licenceNodeName}/${uuids.validLicence}/${myftConst.memberRelName}/${myftConst.userNodeName}?page=1&limit=500`)
-				.reply(200, () => require('kat-client-proxies/test/mocks/fixtures/getLicenceMembers'));
+				.reply(200, () => getLicenceMembersFixture);
 
 			nock(config.MYFT_API_URL)
 				.get(`/${myftConst.groupNodeName}/${uuids.validLicence}/${myftConst.memberRelName}/${myftConst.userNodeName}?page=1&limit=500`)
-				.reply(200, () => require('kat-client-proxies/test/mocks/fixtures/getLicenceMembers'));
+				.reply(200, () => getLicenceMembersFixture);
 
 			nock(config.MYFT_API_URL)
 				.put(`/${myftConst.licenceNodeName}/${uuids.validLicence}`)

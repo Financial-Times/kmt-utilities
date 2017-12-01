@@ -3,8 +3,8 @@ const sinon = require('sinon');
 const expect = require('chai').expect;
 const nock = require('nock');
 const httpMocks = require('node-mocks-http');
-const config = require('kat-client-proxies/lib/helpers/config');
-const uuids = require('kat-client-proxies/test/mocks/uuids');
+const config = require('@financial-times/kat-client-proxies/lib/helpers/config');
+const uuids = require('@financial-times/kat-client-proxies/test/mocks/uuids');
 const {getLicenceId} = require('./../../../index');
 
 describe('middleware/getLicenceId', () => {
@@ -75,7 +75,7 @@ describe('middleware/getLicenceId', () => {
 	it('should redirect when an invalid licence id and a session is provided', done => {
 		nock(config.API_GATEWAY_HOST)
 			.get(`/licences?adminuserid=${uuids.validUser}`)
-			.reply(200, () => require('kat-client-proxies/test/mocks/fixtures/accessLicenceGetLicence'));
+			.reply(200, () => require('@financial-times/kat-client-proxies/test/mocks/fixtures/accessLicenceGetLicence'));
 
 		req.params.licenceId = 'invalidLicenceId';
 		req.session = {isPopulated: true};
