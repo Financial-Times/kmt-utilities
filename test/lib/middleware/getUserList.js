@@ -3,9 +3,9 @@ const sinon = require('sinon');
 const expect = require('chai').expect;
 const nock = require('nock');
 const httpMocks = require('node-mocks-http');
-const config = require('kat-client-proxies/lib/helpers/config');
-const expectOwnProperties = require('kat-client-proxies/test/helpers/expectExtensions').expectOwnProperties;
-const uuids = require('kat-client-proxies/test/mocks/uuids');
+const config = require('@financial-times/kat-client-proxies/lib/helpers/config');
+const expectOwnProperties = require('@financial-times/kat-client-proxies/test/helpers/expectExtensions').expectOwnProperties;
+const uuids = require('@financial-times/kat-client-proxies/test/mocks/uuids');
 const {getUserList} = require('./../../../index');
 
 describe('middleware/getUserList', () => {
@@ -39,7 +39,7 @@ describe('middleware/getUserList', () => {
 	it('should get the list of users for a valid licence ID', done => {
 		nock(`${config.API_GATEWAY_HOST}/licence-seat-holders`)
 			.get(`/${uuids.validLicence}`)
-			.reply(200, () => require('kat-client-proxies/test/mocks/fixtures/licenceSeatHolders'));
+			.reply(200, () => require('@financial-times/kat-client-proxies/test/mocks/fixtures/licenceSeatHolders'));
 
 		req.licenceId = uuids.validLicence;
 		const nextSpy = sinon.spy();

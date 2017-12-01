@@ -3,11 +3,11 @@ const sinon = require('sinon');
 const nock = require('nock');
 const expect = require('chai').expect;
 const httpMocks = require('node-mocks-http');
-const clientErrors = require('kat-client-proxies').clientErrors;
-const uuids = require('kat-client-proxies/test/mocks/uuids');
+const clientErrors = require('@financial-times/kat-client-proxies').clientErrors;
+const uuids = require('@financial-times/kat-client-proxies/test/mocks/uuids');
+const config = require('@financial-times/kat-client-proxies/lib/helpers/config');
 const { getAuthToken } = require('./../../../index');
 const getSessionToken = require('./../helpers/getSessionToken');
-const config = require('kat-client-proxies/lib/helpers/config');
 
 describe('middleware/getAuthToken', () => {
 	let logMessageStub;

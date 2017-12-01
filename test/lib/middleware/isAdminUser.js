@@ -2,8 +2,8 @@ const logger = require('./../../../lib/logger');
 const sinon = require('sinon');
 const expect = require('chai').expect;
 const httpMocks = require('node-mocks-http');
-const expectOwnProperties = require('kat-client-proxies/test/helpers/expectExtensions').expectOwnProperties;
-const uuids = require('kat-client-proxies/test/mocks/uuids');
+const expectOwnProperties = require('@financial-times/kat-client-proxies/test/helpers/expectExtensions').expectOwnProperties;
+const uuids = require('@financial-times/kat-client-proxies/test/mocks/uuids');
 const {isAdminUser} = require('./../../../index');
 
 describe('middleware/isAdminUser', () => {
