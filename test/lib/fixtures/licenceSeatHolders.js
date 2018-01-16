@@ -12,4 +12,4 @@ module.exports = {
 		'joinedDate': '2016-10-21T13:29:22.412Z'
 	  }
 	]
-  }
+  };
