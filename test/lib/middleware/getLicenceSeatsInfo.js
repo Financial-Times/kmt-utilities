@@ -7,6 +7,7 @@ const config = require('@financial-times/kat-client-proxies/lib/helpers/config')
 const expectOwnProperties = require('@financial-times/kat-client-proxies/test/helpers/expectExtensions').expectOwnProperties;
 const uuids = require('@financial-times/kat-client-proxies/test/mocks/uuids');
 const {getLicenceSeatsInfo} = require('./../../../index');
+const seatHolders = require('./../fixtures/licenceSeatHolders');
 
 describe('middleware/getLicenceSeatsInfo', () => {
 	let logMessageStub;
@@ -42,8 +43,8 @@ describe('middleware/getLicenceSeatsInfo', () => {
 			.reply(200, () => require('@financial-times/kat-client-proxies/test/mocks/fixtures/accessLicenceInfo'));
 
 		nock(config.API_GATEWAY_HOST)
-			.get(`/licences/${uuids.validLicence}/seats`)
-			.reply(200, () => require('@financial-times/kat-client-proxies/test/mocks/fixtures/accessLicenceGetSeats'));
+			.get(`/licence-seat-holders/${uuids.validLicence}`)
+			.reply(200, () => seatHolders);
 
 		req.licenceId = uuids.validLicence;
 		const nextSpy = sinon.spy();
