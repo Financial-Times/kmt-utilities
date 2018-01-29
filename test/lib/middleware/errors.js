@@ -34,19 +34,18 @@ describe('middleware/errors', () => {
 		const res = { redirect: sinon.spy() };
 		const req = { headers: {}, hostname: 'kat.ft.com', protocol: 'https', originalUrl: '/overview/abc' };
 
-		it('should redirect to the Login page when it is an authentication error', done => {
-			const constructedRedirectUrl = uriConstructor.redirectUrl(req);
+		it('should redirect to the Login page when it is an authentication error', () => {
+			const constructedRedirectUrl = uriConstructor.redirectUrl(req, res);
 			err.status = 401;
 
 			let fetchSpy = sinon.spy(global, 'fetch');
 
-			middleware(err, req, res, next).then(() => {
+			return middleware(err, req, res, next).then(() => {
 				expect(fetchSpy).to.be.calledWith(config.LOGOUT_URL);
 
 				expect(res.redirect).to.be.calledWith(constructedRedirectUrl);
 
 				fetchSpy.restore();
-				done();
 			});
 		});
 
