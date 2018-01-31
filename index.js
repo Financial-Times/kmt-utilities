@@ -24,4 +24,5 @@ module.exports = {
 	initCookieSession: require('./lib/initCookieSession.js'),
 	logger: require('./lib/logger.js'),
 	uriConstructor: require('./lib/uriConstructor.js'),
+	redirectToExistingSession: require('./lib/middleware/assignActiveLicence.js'),
 };
