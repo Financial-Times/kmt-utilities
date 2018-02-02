@@ -3,10 +3,11 @@ const sinon = require('sinon');
 const expect = require('chai').expect;
 const httpMocks = require('node-mocks-http');
 const uuids = require('@financial-times/kat-client-proxies/test/mocks/uuids');
-const {redirectToExistingSession} = require('./../../../index');
+const {redirectToExistingSession, assignActiveLicence } = require('./../../../index');
 
 describe('middleware/redirectToExistingSession', () => {
 	let logMessageStub;
+	let assignActiveLicenceStub;
 	const logMessages = [];
 
 	before(done => {
@@ -15,6 +16,14 @@ describe('middleware/redirectToExistingSession', () => {
 		});
 
 		done();
+	});
+
+	beforeEach(() => {
+		assignActiveLicenceStub = sinon.stub(assignActiveLicence, 'addLicenceAcquisitionData');
+	});
+
+	afterEach(() => {
+		assignActiveLicenceStub.restore();
 	});
 
 	after(done => {
@@ -36,7 +45,18 @@ describe('middleware/redirectToExistingSession', () => {
 			}
 		},
 		currentUser: {uuid: uuids.validUser},
-		listOfLicences:  [
+		KATConfig: {
+			licenceList :[
+				{
+					licenceId: uuids.validLicence,
+					creationDate: '2015-11-30T14:53:32.795Z',
+					status: 'active',
+					contractId: 'test',
+					product: 'test'
+				}
+			]
+		},
+		listOfLicences :[
 			{
 				licenceId: uuids.validLicence,
 				creationDate: '2015-11-30T14:53:32.795Z',
