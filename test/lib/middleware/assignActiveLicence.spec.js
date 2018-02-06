@@ -7,7 +7,7 @@ const { assignActiveLicence } = require('./../../../index');
 const { acquisitionCtxClient } = require('@financial-times/kat-client-proxies');
 const licenceContext = require('./../fixtures/licenceContext.js');
 
-describe('assignActiveLicence', () => {
+describe.only('assignActiveLicence', () => {
 	let getContextStub;
 	let logMessageStub;
 	const logMessages = [];
@@ -35,8 +35,7 @@ describe('assignActiveLicence', () => {
 		const res = httpMocks.createResponse();
 		const nextSpy = sinon.spy();
 		const licenceId = '00000000-0000-0000-0000-000000000001';
-		const redirectUrl = licenceContext.items[0].barrierContext.redirectUrl;
-		const displayName = licenceContext.items[0].displayName;
+		const acx = licenceContext.AcquisitionContext;
 		const req = {
 			params: {
 				licenceId
@@ -65,8 +64,8 @@ describe('assignActiveLicence', () => {
 					const activeLicence = req.KATConfig.activeLicence;
 
 					expect(activeLicence).to.be.an('Object');
-					expect(activeLicence.signupURI).to.equal(redirectUrl);
-					expect(activeLicence.displayName).to.equal(displayName);
+					expect(activeLicence.signupURI).to.equal(acx.barrierContext.redirectUrl);
+					expect(activeLicence.displayName).to.equal(acx.displayName);
 					expect(activeLicence.productAbbrv).to.equal('Premium');
 				});
 
