@@ -30,6 +30,7 @@ describe('assignActiveLicence', () => {
 		logMessageStub.restore();
 
 	});
+
 	it('should decorate req.KATConfig.activeLicence with data from acquisition context service ', () => {
 		const res = httpMocks.createResponse();
 		const nextSpy = sinon.spy();
@@ -51,7 +52,7 @@ describe('assignActiveLicence', () => {
 					}
 				]
 			},
-		}
+		};
 
 		nock('https://api.ft.com')
 			.get(`/acquisition-contexts/v1?access-licence-id=${licenceId}`)
@@ -60,7 +61,7 @@ describe('assignActiveLicence', () => {
 		getContextStub = sinon.stub(acquisitionCtxClient, 'getContexts').resolves(licenceContext);
 
 			return assignActiveLicence(req, res, nextSpy)
-				.then((response) => {
+				.then(() => {
 					const activeLicence = req.KATConfig.activeLicence;
 
 					expect(activeLicence).to.be.an('Object');
@@ -75,12 +76,11 @@ describe('assignActiveLicence', () => {
 		const res = httpMocks.createResponse();
 		const nextSpy = sinon.spy();
 		const licenceId = '00000000-0000-0000-0000-000000000002';
-		const redirectUrl = licenceContext.items[0].barrierContext.redirectUrl;
-		const displayName = licenceContext.items[0].displayName;
 		const req = {
 			params: {
 				licenceId
 			},
+
 			KATConfig: {
 				licenceList :[
 					{
@@ -92,14 +92,14 @@ describe('assignActiveLicence', () => {
 					}
 				]
 			},
-		}
+		};
 
 		nock('https://api.ft.com')
 			.get(`/acquisition-contexts/v1?access-licence-id=${licenceId}`)
 			.reply(404);
 
 			return assignActiveLicence(req, res, nextSpy)
-				.then((response) => {
+				.then(() => {
 					const activeLicence = req.KATConfig.activeLicence;
 
 					expect(activeLicence).to.be.an('Object');
@@ -114,8 +114,6 @@ describe('assignActiveLicence', () => {
 		const res = httpMocks.createResponse();
 		const nextSpy = sinon.spy();
 		const licenceId = '00000000-0000-0000-0000-000000000002';
-		const redirectUrl = licenceContext.items[0].barrierContext.redirectUrl;
-		const displayName = licenceContext.items[0].displayName;
 		const req = {
 			params: {
 				licenceId
@@ -131,7 +129,7 @@ describe('assignActiveLicence', () => {
 					}
 				]
 			},
-		}
+		};
 
 		nock('https://api.ft.com')
 			.get(`/acquisition-contexts/v1?access-licence-id=${licenceId}`)
