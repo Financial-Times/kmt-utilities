@@ -35,7 +35,6 @@ describe.only('assignActiveLicence', () => {
 		const res = httpMocks.createResponse();
 		const nextSpy = sinon.spy();
 		const licenceId = '00000000-0000-0000-0000-000000000001';
-		const acx = licenceContext.AcquisitionContext;
 		const req = {
 			params: {
 				licenceId
@@ -64,8 +63,8 @@ describe.only('assignActiveLicence', () => {
 					const activeLicence = req.KATConfig.activeLicence;
 
 					expect(activeLicence).to.be.an('Object');
-					expect(activeLicence.signupURI).to.equal(acx.barrierContext.redirectUrl);
-					expect(activeLicence.displayName).to.equal(acx.displayName);
+					expect(activeLicence.signupURI).to.equal(licenceContext.barrierContext.redirectUrl);
+					expect(activeLicence.displayName).to.equal(licenceContext.displayName);
 					expect(activeLicence.productAbbrv).to.equal('Premium');
 				});
 
