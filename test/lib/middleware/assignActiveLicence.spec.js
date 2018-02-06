@@ -7,15 +7,36 @@ const { assignActiveLicence } = require('./../../../index');
 const { acquisitionCtxClient } = require('@financial-times/kat-client-proxies');
 const licenceContext = require('./../fixtures/licenceContext.js');
 
-describe.only('assignActiveLicence', () => {
+describe('assignActiveLicence', () => {
 	let getContextStub;
 	let logMessageStub;
 	const logMessages = [];
+	const licenceId = '00000000-0000-0000-0000-000000000001';
+	let req;
 
 	before(() => {
 		logMessageStub = sinon.stub(logger, 'log').callsFake((...params) => {
 			logMessages.push(params);
 		});
+	});
+
+	beforeEach(() => {
+		req = {
+			params: {
+				licenceId
+			},
+			KATConfig: {
+				licenceList :[
+					{
+						licenceId,
+						creationDate: '2015-11-30T14:53:32.795Z',
+						status: 'active',
+						contractId: 'KAT-test',
+						product: 'FT.com Premium'
+					}
+				]
+			},
+		};
 	});
 
 	afterEach(() => {
@@ -34,23 +55,6 @@ describe.only('assignActiveLicence', () => {
 	it('should decorate req.KATConfig.activeLicence with data from acquisition context service ', () => {
 		const res = httpMocks.createResponse();
 		const nextSpy = sinon.spy();
-		const licenceId = '00000000-0000-0000-0000-000000000001';
-		const req = {
-			params: {
-				licenceId
-			},
-			KATConfig: {
-				licenceList :[
-					{
-						licenceId,
-						creationDate: '2015-11-30T14:53:32.795Z',
-						status: 'active',
-						contractId: 'KAT-test',
-						product: 'FT.com Premium'
-					}
-				]
-			},
-		};
 
 		nock('https://api.ft.com')
 			.get(`/acquisition-contexts/v1?access-licence-id=${licenceId}`)
@@ -74,23 +78,6 @@ describe.only('assignActiveLicence', () => {
 		const res = httpMocks.createResponse();
 		const nextSpy = sinon.spy();
 		const licenceId = '00000000-0000-0000-0000-000000000002';
-		const req = {
-			params: {
-				licenceId
-			},
-
-			KATConfig: {
-				licenceList :[
-					{
-						licenceId,
-						creationDate: '2015-11-30T14:53:32.795Z',
-						status: 'active',
-						contractId: 'KAT-test',
-						product: 'FT.com Premium'
-					}
-				]
-			},
-		};
 
 		nock('https://api.ft.com')
 			.get(`/acquisition-contexts/v1?access-licence-id=${licenceId}`)
@@ -112,22 +99,6 @@ describe.only('assignActiveLicence', () => {
 		const res = httpMocks.createResponse();
 		const nextSpy = sinon.spy();
 		const licenceId = '00000000-0000-0000-0000-000000000002';
-		const req = {
-			params: {
-				licenceId
-			},
-			KATConfig: {
-				licenceList :[
-					{
-						licenceId,
-						creationDate: '2015-11-30T14:53:32.795Z',
-						status: 'active',
-						contractId: 'KAT-test',
-						product: 'FT.com Premium'
-					}
-				]
-			},
-		};
 
 		nock('https://api.ft.com')
 			.get(`/acquisition-contexts/v1?access-licence-id=${licenceId}`)
