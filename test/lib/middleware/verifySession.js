@@ -40,10 +40,10 @@ describe('middleware/verifySession', () => {
 
 		it('should validate the session and return the logged in user details', done => {
 			nock(config.API_GATEWAY_HOST)
-				.get(`/sessions/${uuids.validFTSession}`)
+				.get(`/sessions/s/${uuids.validFTSessionSecure}`)
 				.reply(200, () => require('@financial-times/kat-client-proxies/test/mocks/fixtures/sessionVerify'));
 
-			req.headers.cookie = `FTSession=${uuids.validFTSession}`;
+			req.headers.cookie = `FTSession_s=${uuids.validFTSessionSecure}`;
 			const nextSpy = sinon.spy();
 
 			getUserId(req, res, nextSpy)

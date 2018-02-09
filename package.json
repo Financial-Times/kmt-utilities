@@ -20,7 +20,7 @@
   "author": "thurston.tye@ft.com",
   "license": "MIT",
   "dependencies": {
-    "@financial-times/kat-client-proxies": "^3.0.0",
+    "@financial-times/kat-client-proxies": "^4.0.0",
     "@financial-times/n-logger": "~5.4.0",
     "cookie-session": "~2.0.0-alpha.1",
     "cookies": "~0.6.1",
