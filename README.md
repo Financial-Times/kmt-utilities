@@ -5,12 +5,12 @@ KAT (Knowledge & administration tools) is an ft.com application created for Fina
 
 ## Usage
 ```sh
-npm install --save @financial-times/kat-footer
+npm install --save @financial-times/kmt-utilities
 ```
 
 Example using the `initCookieSession` middleware. See `index.js` for exposed functions.
 ```js
-const { initCookieSession } = require('kmt-utilities');
+const { initCookieSession } = require('@financial-times/kmt-utilities');
 
 app.use(initCookieSession);
 ```
