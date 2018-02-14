@@ -38,7 +38,7 @@ describe('middleware/verifySession', () => {
 		});
 		const res = httpMocks.createResponse();
 
-		it('should validate the session and return the logged in user details', done => {
+		it('should validate the session and return the logged in user details', () => {
 			nock(config.API_GATEWAY_HOST)
 				.get(`/sessions/s/${uuids.validFTSessionSecure}`)
 				.reply(200, () => require('@financial-times/kat-client-proxies/test/mocks/fixtures/sessionVerify'));
@@ -46,32 +46,26 @@ describe('middleware/verifySession', () => {
 			req.headers.cookie = `FTSession_s=${uuids.validFTSessionSecure}`;
 			const nextSpy = sinon.spy();
 
-			getUserId(req, res, nextSpy)
+			return getUserId(req, res, nextSpy)
 				.then(() => {
 					expect(nextSpy.calledOnce).to.be.true;
 
 					const currentUser = req.currentUser;
 					expect(currentUser).to.be.an('object');
 					expectOwnProperties(currentUser, ['uuid', 'creationTime', 'rememberMe']);
-
-					done();
-				})
-				.catch(done);
+				});
 		});
 
-		it('should redirect to login when no session is provided', done => {
+		it('should redirect to login when no session is provided', () => {
 			delete req.headers.cookie;
 
 			const nextSpy = sinon.spy();
 
-			getUserId(req, res, nextSpy)
+			return getUserId(req, res, nextSpy)
 				.then(() => {
 					const redirectUrl = res._getRedirectUrl();
 					expect(redirectUrl).not.to.be.empty;
-
-					done();
-				})
-				.catch(done);
+				});
 		});
 	});
 });
