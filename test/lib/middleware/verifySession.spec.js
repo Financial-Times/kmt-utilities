@@ -3,7 +3,7 @@ const sinon = require('sinon');
 const expect = require('chai').expect;
 const nock = require('nock');
 const httpMocks = require('node-mocks-http');
-const config = require('@financial-times/kat-client-proxies/lib/helpers/config');
+const katClientProxiesConfig = require('@financial-times/kat-client-proxies/lib/helpers/config');
 const expectOwnProperties = require('@financial-times/kat-client-proxies/test/helpers/expectExtensions').expectOwnProperties;
 const uuids = require('@financial-times/kat-client-proxies/test/mocks/uuids');
 const {getUserId} = require('./../../../index').verifySession;
@@ -39,7 +39,7 @@ describe('middleware/verifySession', () => {
 		const res = httpMocks.createResponse();
 
 		it('should validate the session and return the logged in user details', () => {
-			nock(config.API_GATEWAY_HOST)
+			nock(katClientProxiesConfig.API_GATEWAY_HOST)
 				.get(`/sessions/s/${uuids.validFTSessionSecure}`)
 				.reply(200, () => require('@financial-times/kat-client-proxies/test/mocks/fixtures/sessionVerify'));
 
@@ -60,6 +60,8 @@ describe('middleware/verifySession', () => {
 			delete req.headers.cookie;
 
 			const nextSpy = sinon.spy();
+
+			nock('https://accounts.ft.com').get('/logout').reply(200);
 
 			return getUserId(req, res, nextSpy)
 				.then(() => {
