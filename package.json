@@ -22,10 +22,11 @@
   "dependencies": {
     "@financial-times/kat-client-proxies": "^4.0.0",
     "@financial-times/n-logger": "~5.4.0",
-    "cookie-session": "~2.0.0-alpha.1",
-    "cookies": "~0.6.1",
     "bluebird": "~3.4.6",
-    "body-parser": "~1.14.2"
+    "body-parser": "~1.14.2",
+    "compression": "^1.7.2",
+    "cookie-session": "~2.0.0-alpha.1",
+    "cookies": "~0.6.1"
   },
   "devDependencies": {
     "@financial-times/n-gage": "^1.8.17",
