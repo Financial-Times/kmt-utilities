@@ -153,7 +153,7 @@ describe('middleware/isAdminSession', () => {
 
 					const katConfig = req.KATConfig;
 					expect(katConfig).to.be.an('object');
-					expectOwnProperties(katConfig, ['licenceList', 'displayName', 'userId']);
+					expectOwnProperties(katConfig, ['licenceList', 'userId']);
 					expect(katConfig.userId).to.equal(uuids.validUser);
 
 					const licenceList = katConfig.licenceList;
