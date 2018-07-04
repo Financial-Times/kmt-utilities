@@ -30,19 +30,19 @@
   },
   "devDependencies": {
     "@financial-times/n-gage": "^1.8.17",
-    "chai": "^3.5.0",
-    "chai-http": "^3.0.0",
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
     "dotenv": "^2.0.0",
     "eslint": "~3.7.1",
     "express": "^4.14.0",
     "lintspaces": "^0.5.1",
     "lintspaces-cli": "^0.6.0",
-    "mocha": "^3.2.0",
+    "mocha": "^5.2.0",
     "nock": "^9.0.13",
     "node-mocks-http": "^1.6.1",
     "npm-prepublish": "^1.2.3",
-    "sinon": "^2.2.0",
-    "sinon-chai": "^2.10.0"
+    "sinon": "^6.0.1",
+    "sinon-chai": "^3.2.0"
   },
   "config": {}
 }
