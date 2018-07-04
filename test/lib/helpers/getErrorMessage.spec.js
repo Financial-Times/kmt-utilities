@@ -4,7 +4,7 @@ const getErrorMessage = require('./../../../lib/helpers/getErrorMessage');
 describe('helpers/getErrorMessage', () => {
 	it('should return an array', () => {
 		const errorMessage = getErrorMessage(404);
-		expect(errorMessage).to.be.an.array;
+		expect(errorMessage).to.be.an('array');
 	});
 
 	it('should get a specific error message when it has one for the given status code', () => {

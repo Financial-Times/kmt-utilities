@@ -99,7 +99,6 @@ describe('middleware/bodyParser', () => {
 				.send(bodyStr)
 				.set('Content-Type', 'image/svg+xml')
 				.end((err, res) => {
-					expect(err.status).to.equal(400);
 					expect(res.status).to.equal(400);
 
 					done();
