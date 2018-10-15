@@ -49,9 +49,7 @@ describe('middleware/checkLicenceStatus', () => {
 			isActive(req, res, nextSpy)
 				.then(() => {
 					expect(nextSpy.calledOnce).to.be.true;
-
-					const headers = res._getHeaders();
-					expect(headers['Cache-Control']).to.equal('private, no-cache, no-store, must-revalidate');
+					expect(res.get('Cache-Control')).to.equal('private, no-cache, no-store, must-revalidate');
 
 					done();
 				})
