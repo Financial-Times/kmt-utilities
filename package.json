@@ -8,7 +8,8 @@
     "commit": "commit-wizard",
     "precommit": "node_modules/.bin/secret-squirrel",
     "prepush": "make verify -j3",
-    "commitmsg": "node_modules/.bin/secret-squirrel-commitmsg"
+    "commitmsg": "node_modules/.bin/secret-squirrel-commitmsg",
+    "prepare": "npx snyk protect || npx snyk protect -d || true"
   },
   "engines": {
     "node": ">=6.11.1"
@@ -43,7 +44,8 @@
     "node-mocks-http": "^1.6.1",
     "npm-prepublish": "^1.2.3",
     "sinon": "^6.0.1",
-    "sinon-chai": "^3.2.0"
+    "sinon-chai": "^3.2.0",
+    "snyk": "^1.167.2"
   },
   "config": {}
 }
